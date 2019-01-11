@@ -1,1 +1,1 @@
-# create-my-cv
+# create-your-cv
