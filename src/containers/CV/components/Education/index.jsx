@@ -5,10 +5,17 @@ import { Map } from 'immutable';
 import '../../styles.css';
 
 class Education extends Component {
-    onConfirm = (data) => {
+    onConfirm = (info) => {
+        const data = Map({
+            field1: info.field1,
+            field2: info.field2,
+            startDate: info.startDate,
+            endDate: info.endDate,
+            description: info.description
+        });
 
     }
-    
+
     render() {
         const header = "Education";
         const fields = Map({

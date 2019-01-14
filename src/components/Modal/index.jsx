@@ -13,9 +13,8 @@ class Modal extends Component {
         }
     }
 
-    confirm = (data) => {
+    confirm = () => {
         this.setVisibility(false)
-        this.props.onConfirm(data)
     }
 
     render() {

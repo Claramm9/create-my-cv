@@ -14,7 +14,6 @@ class CV extends Component {
         return (
             <Router>
                 <div>
-                    <Header />
                     <div className="wrapper">
                         <div className="sidenav">
                             <Sidebar />
