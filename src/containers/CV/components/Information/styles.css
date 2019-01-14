@@ -1,0 +1,34 @@
+.form-row {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+label {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+input {
+    width: 180px;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+#direction {
+    width: 470px;
+}
+
+#save {
+    outline-style: none;
+    border-style: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #282c34;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+
