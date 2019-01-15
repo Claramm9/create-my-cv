@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
 import { Map } from 'immutable';
+import React, { Component } from 'react';
+
+import '../../styles.css';
 import Modal from '../../../../components/Modal/index';
 import Display from '../../../../components/Display/index';
-import '../../styles.css';
 
 class WorkExperience extends Component {
     render() {

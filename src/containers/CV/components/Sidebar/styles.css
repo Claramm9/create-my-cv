@@ -1,6 +1,5 @@
- /* The navigation menu links */
 ul{
-    list-style: none!important;
+    list-style: none;
  }
 
  .sidebar-item {
@@ -11,11 +10,10 @@ ul{
     display: block;
   }
   
-/* When you mouse over the navigation links, change their color */
 .sidebar-item:hover {
    color: #f1f1f1;
 }
 
 .sidebar-item:active {
-   color: #f1f1f1!important;
+   color: #f1f1f1;
 }

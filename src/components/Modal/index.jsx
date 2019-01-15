@@ -1,5 +1,6 @@
-import './styles.css';
 import React, { Component } from 'react';
+
+import './styles.css';
 import Form from './Form';
 
 class Modal extends Component {
@@ -13,8 +14,9 @@ class Modal extends Component {
         }
     }
 
-    confirm = () => {
-        this.setVisibility(false)
+    confirm = (data) => {
+        this.setVisibility(false);
+        this.props.onConfirm(data);
     }
 
     render() {

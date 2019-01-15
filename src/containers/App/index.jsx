@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import Home from '../Home/index';
-import Header from '../CV/components/Header/index';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import CV from '../CV/index';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Home from '../Home/index';
 
 const App = () => (
     <Router>
-        <div>
-            <Header />
-            <Home />
+        <Switch>
+            <Route exact path="/" component={Home} />
             <Route path="/CV" component={CV} />
-        </div>
+        </Switch>
     </Router>
 );
 

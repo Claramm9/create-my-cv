@@ -1,19 +1,21 @@
-import './styles.css';
 import React, { Component } from 'react';
-import Header from '../../components/Header/index';
-import Sidebar from '../../components/Sidebar/index';
-import Information from './components/Information/index';
-import Education from './components/Education/index';
-import WorkExperience from './components/WorkExperience/index';
-import Aptitudes from './components/Aptitudes/index';
-import Recommendation from './components/Recommendations/index';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import './styles.css';
+import Sidebar from './components/Sidebar';
+import Header from '../../components/Header';
+import Education from './components/Education';
+import Aptitudes from './components/Aptitudes';
+import Information from './components/Information';
+import WorkExperience from './components/WorkExperience';
+import Recommendation from './components/Recommendations';
 
 class CV extends Component {
     render() {
         return (
             <Router>
                 <div>
+                    <Header />
                     <div className="wrapper">
                         <div className="sidenav">
                             <Sidebar />

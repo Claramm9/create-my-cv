@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
-import Display from '../../../../components/Display/index';
-import Modal from '../../../../components/Modal/index';
 import { Map } from 'immutable';
+import { connect } from 'react-redux';
+
 import '../../styles.css';
+import { addEducation } from '../../actions/index';
+import Modal from '../../../../components/Modal/index';
+import Display from '../../../../components/Display/index';
 
-class Education extends Component {
-    onConfirm = (info) => {
-        const data = Map({
-            field1: info.field1,
-            field2: info.field2,
-            startDate: info.startDate,
-            endDate: info.endDate,
-            description: info.description
-        });
-
+class EducationComponent extends Component {
+    onConfirm = (data) => {
+        this.props.addEducation(data);
     }
 
     render() {
@@ -30,10 +26,22 @@ class Education extends Component {
                 <Modal onConfirm={this.onConfirm} header={header} fields={fields}>
                     <button className="add">+</button>
                 </Modal>
-                <Display />
+                <Display fields={fields} info={this.props.education}/>
             </>
         );
     }
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addEducation: info => dispatch(addEducation(info))
+    };
+}
+
+const mapStateToProps = ({ Cv }) => ({
+    education: Cv.get('education')
+})
+
+const Education = connect(mapStateToProps, mapDispatchToProps)(EducationComponent);
 
 export default Education;
