@@ -4,14 +4,48 @@ import React, { Component } from 'react';
 
 import './styles.css';
 import { addInfo } from '../../actions/index';
-import FormValidator from '../../../../components/Modal/validator';
 
 class InformationComponent extends Component {
 
     constructor(props) {
         super(props);
 
+        // this.state = {
+        //     fields: {
+        //         name: '',
+        //         lastName: '',
+        //         direction: '',
+        //         number: '',
+        //         email: '',
+        //         birthday: '',
+        //         nationality: ''
+        //     },
+        //     errors: {
+        //         name: '',
+        //         lastName: '',
+        //         direction: '',
+        //         number: '',
+        //         email: '',
+        //         birthday: '',
+        //         nationality: ''
+        //     }
+        // };
         this.state = {
+            fields: {},
+            errors: {
+                name: '',
+                lastName: '',
+                direction: '',
+                number: '',
+                email: '',
+                birthday: '',
+                nationality: ''
+            }
+        };
+    }
+    validateForm = () => {
+        let fields = this.state.fields;
+        let errors = {
             name: '',
             lastName: '',
             direction: '',
@@ -20,33 +54,96 @@ class InformationComponent extends Component {
             birthday: '',
             nationality: ''
         };
-        this.errors = {
-            name: '',
-            lastName: '',
-            direction: '',
-            number: '',
-            email: '',
-            birthday: '',
-            nationality: ''
-        };
+        let formIsValid = true;
 
+        if (!fields.name) {
+            formIsValid = false;
+            errors.name = "*Please enter your name.";
+        }
+
+        if (!fields.lastName) {
+            formIsValid = false;
+            errors.lastName = "*Please enter your last name.";
+        }
+
+        if (typeof fields.name !== "undefined") {
+            if (!fields.name.match(/^[a-zA-Z ]*$/)) {
+                formIsValid = false;
+                errors.name = "*Please enter alphabet characters only.";
+            }
+        }
+
+        if (!fields.email) {
+            formIsValid = false;
+            errors.email = "*Please enter your email.";
+        }
+
+        if (typeof fields.email !== "undefined") {
+            var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            if (!pattern.test(fields.email)) {
+                formIsValid = false;
+                errors.email = "*Please enter valid email.";
+            }
+        }
+
+        if (!fields.number) {
+            formIsValid = false;
+            errors.number = "*Please enter your mobile number.";
+        }
+
+        if (typeof fields.number !== "undefined") {
+            var patt = new RegExp(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/);
+            if (!patt.test(fields.number)) {
+                formIsValid = false;
+                errors.number = "*Please enter valid mobile number.";
+            }
+        }
+
+        if (!fields.direction) {
+            formIsValid = false;
+            errors.direction = "*Please enter your direction.";
+        }
+
+        if (!fields.birthday) {
+            formIsValid = false;
+            errors.birthday = "*Please enter your birthday.";
+        }
+
+        if (!fields.nationality) {
+            formIsValid = false;
+            errors.nationality = "*Please enter your nationality.";
+        }
+
+
+        this.setState({
+            errors: errors
+        });
+        return formIsValid;
+    }
+
+    handleChange = (e) => {
+        let fields = this.state.fields;
+        fields[e.target.name] = e.target.value;
+        this.setState({
+            fields
+        });
     }
 
     handleClick = (e) => {
         e.preventDefault();
-        // if (this.isEmpty(this.state.name)) {
-        //     this.errors.name = "Should not be empty!";
-        // }
-        const info = Map({
-            name: this.state.name,
-            lastName: this.state.lastName,
-            direction: this.state.direction,
-            number: this.state.number,
-            email: this.state.email,
-            birthday: this.state.birthday,
-            nationality: this.state.nationality
-        });
-        this.props.addInfo(info);
+        if (this.validateForm()) {
+            const info = Map({
+                name: this.state.fields.name,
+                lastName: this.state.lastName,
+                direction: this.state.direction,
+                number: this.state.number,
+                email: this.state.email,
+                birthday: this.state.birthday,
+                nationality: this.state.nationality
+            });
+            this.props.addInfo(info);
+            alert("Saved!");
+        }
     }
     render() {
         return (
@@ -64,10 +161,12 @@ class InformationComponent extends Component {
                                 onChange={this.handleChange}
                             >
                             </input>
-                            <span className="validation">{this.errors.name}</span>
+                            <span className="validation">{this.state.errors.name}</span>
                         </div>
                         <label>
                             Last Name:
+                            </label>
+                        <div className="personal-field">
                             <input
                                 type="text"
                                 name="lastName"
@@ -75,8 +174,8 @@ class InformationComponent extends Component {
                                 onChange={this.handleChange}
                             >
                             </input>
-                        </label>
-                        <span className="validation">{this.errors.lastName}</span>
+                            <span className="validation">{this.state.errors.lastName}</span>
+                        </div>
                     </div>
                     <div className="form-row">
                         <label>
@@ -92,7 +191,7 @@ class InformationComponent extends Component {
                                 onChange={this.handleChange}
                             >
                             </input>
-                            <span className="validation">{this.errors.direction}</span>
+                            <span className="validation">{this.state.errors.direction}</span>
                         </div>
                     </div>
                     <div className="form-row">
@@ -103,12 +202,12 @@ class InformationComponent extends Component {
                             <input
                                 type="text"
                                 name="number"
-                                placeholder="(+34) ..."
+                                placeholder="+34..."
                                 value={this.props.info.get('number')}
                                 onChange={this.handleChange}
                             >
                             </input>
-                            <span className="validation">{this.errors.number}</span>
+                            <span className="validation">{this.state.errors.number}</span>
                         </div>
                         <label>
                             Email:
@@ -122,7 +221,7 @@ class InformationComponent extends Component {
                                 onChange={this.handleChange}
                             >
                             </input>
-                            <span className="validation">{this.errors.email}</span>
+                            <span className="validation">{this.state.errors.email}</span>
                         </div>
                     </div>
                     <div className="form-row">
@@ -136,7 +235,7 @@ class InformationComponent extends Component {
                                 placeholder="--/--/----"
                                 value={this.props.info.get('birthday')}
                                 onChange={this.handleChange}></input>
-                            <span className="validation">{this.errors.birthday}</span>
+                            <span className="validation">{this.state.errors.birthday}</span>
                         </div>
                         <label>
                             Nationality:
@@ -149,7 +248,7 @@ class InformationComponent extends Component {
                                 onChange={this.handleChange}
                             >
                             </input>
-                            <span className="validation">{this.errors.nationality}</span>
+                            <span className="validation">{this.state.errors.nationality}</span>
                         </div>
                     </div>
                     <input
