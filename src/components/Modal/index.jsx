@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './styles.css';
 import Form from './Form';
+import SimpleForm from './SimpleForm';
 
 class Modal extends Component {
     state = {
         isVisible: false
+    }
+    static propTypes = {
+        fields: PropTypes.instanceOf(Map),
+        header: PropTypes.string.isRequired,
+        isSimpleForm: PropTypes.bool.isRequired
     }
 
     setVisibility = (value) => {
@@ -21,7 +28,6 @@ class Modal extends Component {
 
     render() {
         const fields = this.props.fields;
-        console.log(fields.get("center"));
         const displayModal = this.state.isVisible ? { display: 'block' } : { display: 'none' };
         return (
             <>
@@ -31,7 +37,10 @@ class Modal extends Component {
                             <h2 style={{ float: "left" }}>{this.props.header}</h2>
                             <button style={{ float: "right" }} onClick={() => this.setVisibility(false)} title="Close" className="close">X</button>
                         </div>
-                        <Form fields={fields} onConfirm={this.confirm}/>
+                        {this.props.isSimpleForm ? 
+                            <SimpleForm onConfirm={this.confirm} /> : 
+                            <Form fields={fields} onConfirm={this.confirm}/>}
+                            
                         {/* <div>
                             <button onClick={this.confirm}>Confirm</button>
                             <button onClick={() => this.setVisibility(false)}>Cancel</button>

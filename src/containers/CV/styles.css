@@ -30,14 +30,3 @@
     .sidenav a {font-size: 18px;}
   }
 
-.add {
-    border: 1px black solid; 
-    border-radius: 15px;
-    float: right;
-    background-color: transparent;
-    font-size: 20px;
-}
-
-.add:hover {
-    background-color: #F0F0F0;
-}

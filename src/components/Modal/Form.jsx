@@ -43,7 +43,7 @@ class Form extends Component {
         return (
             <form>
                 <label className="modal-form">
-                    {this.props.fields.get("field1")}
+                    {this.props.fields.get("field1")}:
                 </label>
                 <input
                     className="modal-input"
@@ -53,17 +53,18 @@ class Form extends Component {
                 >
                 </input>
                 <label className="modal-form">
-                    {this.props.fields.get("field2")}
+                    {this.props.fields.get("field2")}:
                 </label>
                 <input
                     className="modal-input"
-                    type="text" name="field2"
+                    type="text" 
+                    name="field2"
                     onChange={this.handleChange}
                     value={this.state.field2}
                 >
                 </input>
                 <label className="modal-form">
-                    {this.props.fields.get("startDate")}
+                    {this.props.fields.get("startDate")}:
                 </label>
                 <input
                     className="modal-input"
@@ -75,11 +76,12 @@ class Form extends Component {
                 >
                 </input>
                 <label className="modal-form">
-                    {this.props.fields.get("endDate")}
+                    {this.props.fields.get("endDate")}:
                 </label>
                 <input
                     className="modal-input"
-                    type="text" name="endDate"
+                    type="text"
+                    name="endDate"
                     placeholder="MM-DD-YYYY"
                     onChange={this.handleChange}
                     value={this.state.endDate}
@@ -88,16 +90,16 @@ class Form extends Component {
                 <label className="modal-form">
                     {this.props.fields.get("description")}:
                 </label>
-                <input
+                <textarea
+                    rows="5"
                     id="description"
                     type="text"
                     name="description"
                     onChange={this.handleChange}
                     value={this.state.description}
                 >
-                </input>
-                <input id="save" type="submit" value="Save" onClick={this.handleClick}
-                />
+                </textarea>
+                <div><input id="save" type="submit" value="Save" onClick={this.handleClick}/></div>
             </form >
         )
     }

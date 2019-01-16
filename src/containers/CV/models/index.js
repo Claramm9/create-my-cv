@@ -5,7 +5,7 @@ export const CVModel = Record ({
     education: List(),
     workExperience: List(),
     aptitudes: List(),
-    Recommendation: List()
+    recommendations: List()
 });
 
 export const initialStateCV = new CVModel();

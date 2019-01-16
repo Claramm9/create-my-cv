@@ -4,29 +4,39 @@ import React, { Component } from 'react';
 
 import './styles.css';
 import { addInfo } from '../../actions/index';
+import FormValidator from '../../../../components/Modal/validator';
 
-class InformationC extends Component {
+class InformationComponent extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            name: "",
-            lastName: "",
-            direction: "",
-            number: "",
-            email: "",
-            birthday: "",
-            nationality: ""
+            name: '',
+            lastName: '',
+            direction: '',
+            number: '',
+            email: '',
+            birthday: '',
+            nationality: ''
         };
-    }
+        this.errors = {
+            name: '',
+            lastName: '',
+            direction: '',
+            number: '',
+            email: '',
+            birthday: '',
+            nationality: ''
+        };
 
-    handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
     }
 
     handleClick = (e) => {
         e.preventDefault();
+        // if (this.isEmpty(this.state.name)) {
+        //     this.errors.name = "Should not be empty!";
+        // }
         const info = Map({
             name: this.state.name,
             lastName: this.state.lastName,
@@ -45,17 +55,20 @@ class InformationC extends Component {
                     <div className="form-row">
                         <label>
                             Name:
-                        <input
+                        </label>
+                        <div className="personal-field">
+                            <input
                                 type="text"
                                 name="name"
                                 value={this.props.info.get('name')}
                                 onChange={this.handleChange}
                             >
                             </input>
-                        </label>
+                            <span className="validation">{this.errors.name}</span>
+                        </div>
                         <label>
                             Last Name:
-                        <input
+                            <input
                                 type="text"
                                 name="lastName"
                                 value={this.props.info.get('lastName')}
@@ -63,11 +76,14 @@ class InformationC extends Component {
                             >
                             </input>
                         </label>
+                        <span className="validation">{this.errors.lastName}</span>
                     </div>
                     <div className="form-row">
                         <label>
                             Direction:
-                        <input
+                            </label>
+                        <div className="personal-field">
+                            <input
                                 id="direction"
                                 type="text"
                                 name="direction"
@@ -76,12 +92,15 @@ class InformationC extends Component {
                                 onChange={this.handleChange}
                             >
                             </input>
-                        </label>
+                            <span className="validation">{this.errors.direction}</span>
+                        </div>
                     </div>
                     <div className="form-row">
                         <label>
                             Telephone number:
-                        <input
+                            </label>
+                        <div className="personal-field">
+                            <input
                                 type="text"
                                 name="number"
                                 placeholder="(+34) ..."
@@ -89,10 +108,13 @@ class InformationC extends Component {
                                 onChange={this.handleChange}
                             >
                             </input>
-                        </label>
+                            <span className="validation">{this.errors.number}</span>
+                        </div>
                         <label>
                             Email:
-                        <input
+                        </label>
+                        <div className="personal-field">
+                            <input
                                 type="email"
                                 name="email"
                                 placeholder="....@..."
@@ -100,26 +122,35 @@ class InformationC extends Component {
                                 onChange={this.handleChange}
                             >
                             </input>
-                        </label>
+                            <span className="validation">{this.errors.email}</span>
+                        </div>
                     </div>
                     <div className="form-row">
                         <label>
                             Date of Birth:
-                        <input
+                            </label>
+                        <div className="personal-field">
+                            <input
                                 type="text"
                                 name="birthday"
                                 placeholder="--/--/----"
                                 value={this.props.info.get('birthday')}
                                 onChange={this.handleChange}></input>
-                        </label>
+                            <span className="validation">{this.errors.birthday}</span>
+                        </div>
                         <label>
                             Nationality:
-                        <input
+                            </label>
+                        <div className="personal-field">
+                            <input
                                 type="text"
                                 name="nationality"
                                 value={this.props.info.get('nationality')}
-                                onChange={this.handleChange}></input>
-                        </label>
+                                onChange={this.handleChange}
+                            >
+                            </input>
+                            <span className="validation">{this.errors.nationality}</span>
+                        </div>
                     </div>
                     <input
                         id="save"
@@ -142,6 +173,6 @@ const mapStateToProps = ({ Cv }) => ({
     info: Cv.get('information')
 })
 
-const Information = connect(mapStateToProps, mapDispatchToProps)(InformationC);
+const Information = connect(mapStateToProps, mapDispatchToProps)(InformationComponent);
 
 export default Information;

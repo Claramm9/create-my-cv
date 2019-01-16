@@ -1,5 +1,5 @@
 import { initialStateCV } from '../models/index';
-import { ADD_INFO, ADD_EDUCATION } from '../actions/actionTypes';
+import { ADD_INFO, ADD_EDUCATION, ADD_WORK, ADD_APTITUDE, ADD_RECOMMENDATION } from '../actions/actionTypes';
 
 const cvReducer = (state = initialStateCV, action) => {
     console.log(action);
@@ -8,19 +8,36 @@ const cvReducer = (state = initialStateCV, action) => {
             return state.set('information', action.payload);
         case ADD_EDUCATION:
             const newData = state.get('education').push(action.payload);
-            debugger
             const sortData = newData.sort((a, b) => {
-                if(new Date(a.get('endDate')) < new Date(b.get('endDate'))){
+                if (new Date(a.get('endDate')) < new Date(b.get('endDate'))) {
                     return -1;
-                  }
-                  if(new Date(a.get('endDate')) > new Date(b.get('endDate'))){
+                }
+                if (new Date(a.get('endDate')) > new Date(b.get('endDate'))) {
                     return 1;
-                  }
-                  if(new Date(a.get('endDate')) === new Date(b.get('endDate'))){
+                }
+                if (new Date(a.get('endDate')) === new Date(b.get('endDate'))) {
                     return 0;
-                  }
+                }
             });
             return state.set('education', sortData);
+        case ADD_WORK:
+            const data = state.get('workExperience').push(action.payload);
+            const sortedData = data.sort((a, b) => {
+                if (new Date(a.get('endDate')) < new Date(b.get('endDate'))) {
+                    return -1;
+                }
+                if (new Date(a.get('endDate')) > new Date(b.get('endDate'))) {
+                    return 1;
+                }
+                if (new Date(a.get('endDate')) === new Date(b.get('endDate'))) {
+                    return 0;
+                }
+            });
+            return state.set('workExperience', sortedData);
+        case ADD_APTITUDE:
+            return state.update('aptitudes', (aptitudes) => aptitudes.push(action.payload));
+        case ADD_RECOMMENDATION:
+            return state.update('recommendations', (recommendations) => recommendations.push(action.payload));
         default:
             return state;
     }

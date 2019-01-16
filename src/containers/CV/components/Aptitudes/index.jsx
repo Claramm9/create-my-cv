@@ -1,12 +1,40 @@
 import React, { Component } from 'react';
-import '../../styles.css';
+import { connect } from 'react-redux';
 
-class Aptitudes extends Component {
+import '../../styles.css';
+import { addAptitud } from '../../actions/index';
+import Modal from '../../../../components/Modal/index';
+import Display from '../../../../components/Display/index';
+
+class AptitudesComponent extends Component {
+    confirm = (data) => {
+        this.props.addAptitud(data);
+    }
+
     render() {
+        const header = "Aptitudes";
+        const isSimpleForm = true;
         return (
-            <div className="main">Que tal</div>
+            <>
+                <Modal onConfirm={this.confirm} header={header} isSimpleForm={isSimpleForm}>
+                    <button className="add">+</button>
+                </Modal>
+                <Display isSimpleForm={isSimpleForm} info={this.props.aptitudes}/>
+            </>
         );
     }
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addAptitud: info => dispatch(addAptitud(info))
+    };
+}
+
+const mapStateToProps = ({ Cv }) => ({
+    aptitudes: Cv.get('aptitudes')
+})
+
+const Aptitudes = connect(mapStateToProps, mapDispatchToProps)(AptitudesComponent);
 
 export default Aptitudes;

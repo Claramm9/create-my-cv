@@ -8,12 +8,13 @@ import Modal from '../../../../components/Modal/index';
 import Display from '../../../../components/Display/index';
 
 class EducationComponent extends Component {
-    onConfirm = (data) => {
+    confirm = (data) => {
         this.props.addEducation(data);
     }
 
     render() {
         const header = "Education";
+        const isSimpleForm = false;
         const fields = Map({
             field1: "Center of Studies",
             field2: "Studies",
@@ -23,10 +24,10 @@ class EducationComponent extends Component {
         });
         return (
             <>
-                <Modal onConfirm={this.onConfirm} header={header} fields={fields}>
+                <Modal onConfirm={this.confirm} header={header} fields={fields} isSimpleForm={isSimpleForm}>
                     <button className="add">+</button>
                 </Modal>
-                <Display fields={fields} info={this.props.education}/>
+                <Display isSimpleForm={isSimpleForm} fields={fields} info={this.props.education}/>
             </>
         );
     }
