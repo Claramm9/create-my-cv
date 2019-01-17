@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 
 import '../../styles.css';
 import { addWork } from '../../actions/index';
-import Modal from '../../../../components/Modal/index';
-import Display from '../../../../components/Display/index';
+import Modal from '../../../../components/Modal/index.jsx';
+import Display from '../../../../components/Display/index.jsx';
 
 class WorkExperienceComponent extends Component {
     confirm = (data) => {

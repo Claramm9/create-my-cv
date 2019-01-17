@@ -2,7 +2,7 @@ import './styles.css';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 
-import Header from '../../components/Header/index';
+import Header from '../../components/Header/index.jsx';
 
 class Home extends Component {
     render() {

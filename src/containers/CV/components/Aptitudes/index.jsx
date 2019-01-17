@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import '../../styles.css';
 import { addAptitud } from '../../actions/index';
-import Modal from '../../../../components/Modal/index';
-import Display from '../../../../components/Display/index';
+import Modal from '../../../../components/Modal/index.jsx';
+import Display from '../../../../components/Display/index.jsx';
 
 class AptitudesComponent extends Component {
     confirm = (data) => {

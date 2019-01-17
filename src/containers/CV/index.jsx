@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './styles.css';
-import Sidebar from './components/Sidebar';
-import Header from '../../components/Header';
-import Education from './components/Education';
-import Aptitudes from './components/Aptitudes';
-import Information from './components/Information';
-import WorkExperience from './components/WorkExperience';
-import Recommendation from './components/Recommendations';
+import Sidebar from './components/Sidebar/index.jsx';
+import Header from '../../components/Header/index.jsx';
+import Education from './components/Education/index.jsx';
+import Aptitudes from './components/Aptitudes/index.jsx';
+import Information from './components/Information/index.jsx';
+import WorkExperience from './components/WorkExperience/index.jsx';
+import Recommendation from './components/Recommendations/index.jsx';
 
 class CV extends Component {
     render() {

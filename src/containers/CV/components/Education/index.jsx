@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import '../../styles.css';
 import { addEducation } from '../../actions/index';
-import Modal from '../../../../components/Modal/index';
-import Display from '../../../../components/Display/index';
+import Modal from '../../../../components/Modal/index.jsx';
+import Display from '../../../../components/Display/index.jsx';
 
 class EducationComponent extends Component {
     confirm = (data) => {

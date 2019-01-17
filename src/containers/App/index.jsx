@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import CV from '../CV/index';
-import Home from '../Home/index';
+import CV from '../CV/index.jsx';
+import Home from '../Home/index.jsx';
 
 const App = () => (
     <Router>

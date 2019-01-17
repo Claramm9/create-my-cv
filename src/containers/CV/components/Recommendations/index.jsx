@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 import './styles.css';
 import '../../styles.css';
-import Modal from '../../../../components/Modal';
+import Modal from '../../../../components/Modal/index.jsx';
 import { addRecommendation } from '../../actions';
-import Display from '../../../../components/Display';
+import Display from '../../../../components/Display/index.jsx';
 
 class RecommendationsComponent extends Component {
     handleClick = () => {

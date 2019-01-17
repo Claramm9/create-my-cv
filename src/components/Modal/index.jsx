@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import './styles.css';
-import Form from './Form';
-import SimpleForm from './SimpleForm';
+import Form from './Form.jsx';
+import SimpleForm from './SimpleForm.jsx';
 
 class Modal extends Component {
     state = {
