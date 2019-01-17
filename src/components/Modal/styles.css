@@ -55,7 +55,6 @@
 .modal-input {
     width: 98%;
     height: 30px;
-    margin-bottom: 15px;
     margin-top: 5px;
 }
 
@@ -89,4 +88,18 @@ form {
     margin-top: 20px;
     margin-right: 10px;
     width: fit-content;
+}
+
+.personal-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.validation {
+    margin-top: 0px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    color: red;
+    font-size: 13px;
+    font-style: italic;
 }

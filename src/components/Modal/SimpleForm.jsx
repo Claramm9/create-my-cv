@@ -2,6 +2,7 @@ import { Map } from 'immutable';
 import React, { Component } from 'react';
 
 import './styles.css';
+import { isEmpty } from './validator';
 
 class SimpleForm extends Component {
     constructor(props) {
@@ -9,7 +10,22 @@ class SimpleForm extends Component {
 
         this.state = {
             field: '',
+            error: ''
         };
+    }
+
+    validateForm = () => {
+        let error = '';
+        let formIsValid = true;
+
+        if (isEmpty(this.state.field)) {
+            formIsValid = false;
+            error = "*This field can not be empty.";
+        }
+        this.setState({
+            error: error
+        });
+        return formIsValid;
     }
 
     handleChange = (e) => {
@@ -18,13 +34,18 @@ class SimpleForm extends Component {
 
     handleClick = (e) => {
         e.preventDefault();
-        const data = Map({
-            field: this.state.field
-        });
-        this.setState({
-            field: ''
-        })
-        this.props.onConfirm(data)
+
+        if (this.validateForm()) {
+            const data = Map({
+                field: this.state.field
+            });
+            this.setState({
+                field: '',
+                error: ''
+            })
+            this.props.onConfirm(data)
+            alert("Saved!");
+        }
     }
     render() {
 
@@ -39,7 +60,7 @@ class SimpleForm extends Component {
                     value={this.state.description}
                 >
                 </textarea>
-                <div><input id="save" type="submit" value="Save" onClick={this.handleClick}/></div>
+                <div><input id="save" type="submit" value="Save" onClick={this.handleClick} /></div>
             </form >
         )
     }

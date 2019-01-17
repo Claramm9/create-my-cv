@@ -4,32 +4,13 @@ import React, { Component } from 'react';
 
 import './styles.css';
 import { addInfo } from '../../actions/index';
+import { isEmpty, isEmailValid, isValidName, isValidDate, isValidNumber } from '../../../../components/Modal/validator';
 
 class InformationComponent extends Component {
 
     constructor(props) {
         super(props);
 
-        // this.state = {
-        //     fields: {
-        //         name: '',
-        //         lastName: '',
-        //         direction: '',
-        //         number: '',
-        //         email: '',
-        //         birthday: '',
-        //         nationality: ''
-        //     },
-        //     errors: {
-        //         name: '',
-        //         lastName: '',
-        //         direction: '',
-        //         number: '',
-        //         email: '',
-        //         birthday: '',
-        //         nationality: ''
-        //     }
-        // };
         this.state = {
             fields: {},
             errors: {
@@ -56,64 +37,74 @@ class InformationComponent extends Component {
         };
         let formIsValid = true;
 
-        if (!fields.name) {
+        if(isEmpty(fields.name)){
             formIsValid = false;
             errors.name = "*Please enter your name.";
         }
 
-        if (!fields.lastName) {
+        if (isEmpty(fields.lastName)) {
             formIsValid = false;
             errors.lastName = "*Please enter your last name.";
         }
 
         if (typeof fields.name !== "undefined") {
-            if (!fields.name.match(/^[a-zA-Z ]*$/)) {
+            if (!isValidName(fields.name)) {
                 formIsValid = false;
                 errors.name = "*Please enter alphabet characters only.";
             }
         }
+        if (typeof fields.lastName !== "undefined") {
+            if (!isValidName(fields.lastName)) {
+                formIsValid = false;
+                errors.lastName = "*Please enter alphabet characters only.";
+            }
+        }
 
-        if (!fields.email) {
+        if (isEmpty(fields.email)) {
             formIsValid = false;
             errors.email = "*Please enter your email.";
         }
 
         if (typeof fields.email !== "undefined") {
-            var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-            if (!pattern.test(fields.email)) {
+            if (!isEmailValid(fields.email)) {
                 formIsValid = false;
                 errors.email = "*Please enter valid email.";
             }
         }
 
-        if (!fields.number) {
+        if (isEmpty(fields.number)) {
             formIsValid = false;
             errors.number = "*Please enter your mobile number.";
         }
 
         if (typeof fields.number !== "undefined") {
-            var patt = new RegExp(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/);
-            if (!patt.test(fields.number)) {
+            if (!isValidNumber(fields.number)) {
                 formIsValid = false;
                 errors.number = "*Please enter valid mobile number.";
             }
         }
 
-        if (!fields.direction) {
+        if (isEmpty(fields.direction)) {
             formIsValid = false;
             errors.direction = "*Please enter your direction.";
         }
 
-        if (!fields.birthday) {
+        if (isEmpty(fields.birthday)) {
             formIsValid = false;
             errors.birthday = "*Please enter your birthday.";
         }
 
-        if (!fields.nationality) {
+        if(typeof fields.birthday !== "undefined"){
+            if(!isValidDate(fields.birthday)) {
+                formIsValid = false;
+                errors.birthday = "*Please enter a valid format.";
+            }
+        }
+
+        if (isEmpty(fields.nationality)) {
             formIsValid = false;
             errors.nationality = "*Please enter your nationality.";
         }
-
 
         this.setState({
             errors: errors
@@ -232,7 +223,7 @@ class InformationComponent extends Component {
                             <input
                                 type="text"
                                 name="birthday"
-                                placeholder="--/--/----"
+                                placeholder="MM/DD/YYYY"
                                 value={this.props.info.get('birthday')}
                                 onChange={this.handleChange}></input>
                             <span className="validation">{this.state.errors.birthday}</span>
