@@ -44,7 +44,6 @@ class SimpleForm extends Component {
                 error: ''
             })
             this.props.onConfirm(data)
-            alert("Saved!");
         }
     }
     render() {

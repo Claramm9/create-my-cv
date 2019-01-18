@@ -125,12 +125,12 @@ class InformationComponent extends Component {
         if (this.validateForm()) {
             const info = Map({
                 name: this.state.fields.name,
-                lastName: this.state.lastName,
-                direction: this.state.direction,
-                number: this.state.number,
-                email: this.state.email,
-                birthday: this.state.birthday,
-                nationality: this.state.nationality
+                lastName: this.state.fields.lastName,
+                direction: this.state.fields.direction,
+                number: this.state.fields.number,
+                email: this.state.fields.email,
+                birthday: this.state.fields.birthday,
+                nationality: this.state.fields.nationality
             });
             this.props.addInfo(info);
             alert("Saved!");
@@ -223,7 +223,7 @@ class InformationComponent extends Component {
                             <input
                                 type="text"
                                 name="birthday"
-                                placeholder="MM/DD/YYYY"
+                                placeholder="MM-DD-YYYY"
                                 value={this.props.info.get('birthday')}
                                 onChange={this.handleChange}></input>
                             <span className="validation">{this.state.errors.birthday}</span>

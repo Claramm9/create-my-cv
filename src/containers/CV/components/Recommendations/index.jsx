@@ -9,7 +9,7 @@ import Display from '../../../../components/Display/index.jsx';
 
 class RecommendationsComponent extends Component {
     handleClick = () => {
-        
+
     }
 
     confirm = (data) => {
@@ -24,7 +24,7 @@ class RecommendationsComponent extends Component {
                 <Modal onConfirm={this.confirm} header={header} isSimpleForm={isSimpleForm}>
                     <button className="add">+</button>
                 </Modal>
-                <Display isSimpleForm={isSimpleForm} info={this.props.Cv.get('recommendations')}/>
+                <Display isSimpleForm={isSimpleForm} info={this.props.Cv.get('recommendations')} />
                 <div><button className="finish" onClick={this.handleClick}>Finish</button></div>
             </>
         );

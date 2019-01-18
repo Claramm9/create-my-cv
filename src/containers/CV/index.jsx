@@ -17,9 +17,7 @@ class CV extends Component {
                 <div>
                     <Header />
                     <div className="wrapper">
-                        <div className="sidenav">
                             <Sidebar />
-                        </div>
                         <div className="main">
                             <Route path="/CV/personal-information" component={Information} />
                             <Route path="/CV/education" component={Education} />

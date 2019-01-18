@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import { Map } from 'immutable';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 import './styles.css';
 import Form from './Form.jsx';
@@ -40,11 +41,6 @@ class Modal extends Component {
                         {this.props.isSimpleForm ? 
                             <SimpleForm onConfirm={this.confirm} /> : 
                             <Form fields={fields} onConfirm={this.confirm}/>}
-                            
-                        {/* <div>
-                            <button onClick={this.confirm}>Confirm</button>
-                            <button onClick={() => this.setVisibility(false)}>Cancel</button>
-                        </div> */}
                     </div>
                 </div>
                 <div onClick={() => this.setVisibility(true)}>

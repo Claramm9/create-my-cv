@@ -7,14 +7,7 @@ import { isEmpty, isValidDate } from './validator';
 class Form extends Component {
     constructor(props) {
         super(props);
-
-        // this.state = {
-        //     field1: '',
-        //     field2: '',
-        //     startDate: '',
-        //     endDate: '',
-        //     description: ''
-        // };
+        
         this.state = {
             fields: {},
             errors: {
@@ -87,14 +80,21 @@ class Form extends Component {
         e.preventDefault();
         if (this.validateForm()) {
             const data = Map({
-                field1: this.state.field1,
-                field2: this.state.field2,
-                startDate: this.state.startDate,
-                endDate: this.state.endDate,
-                description: this.state.description
+                field1: this.state.fields.field1,
+                field2: this.state.fields.field2,
+                startDate: this.state.fields.startDate,
+                endDate: this.state.fields.endDate,
+                description: this.state.fields.description
             });
+
             this.setState({
-                fields: {},
+                fields: {
+                    field1: '',
+                    field2: '',
+                    startDate: '',
+                    endDate: '',
+                    description: '',
+                },
                 errors: {
                     field1: '',
                     field2: '',
@@ -102,8 +102,7 @@ class Form extends Component {
                     endDate: ''
                 }
             });
-            this.props.onConfirm(data)
-            alert("Saved!");
+            this.props.onConfirm(data);
         }
     }
     render() {
@@ -118,7 +117,7 @@ class Form extends Component {
                         className="modal-input"
                         type="text" name="field1"
                         onChange={this.handleChange}
-                        value={this.state.field1}
+                        value={this.state.fields.field1}
                     >
                     </input>
                     <span className="validation">{this.state.errors.field1}</span>
@@ -132,7 +131,7 @@ class Form extends Component {
                         type="text"
                         name="field2"
                         onChange={this.handleChange}
-                        value={this.state.field2}
+                        value={this.state.fields.field2}
                     >
                     </input>
                     <span className="validation">{this.state.errors.field2}</span>
@@ -147,7 +146,7 @@ class Form extends Component {
                         name="startDate"
                         placeholder="MM-DD-YYYY"
                         onChange={this.handleChange}
-                        value={this.state.startDate}
+                        value={this.state.fields.startDate}
                     >
                     </input>
                     <span className="validation">{this.state.errors.startDate}</span>
@@ -162,7 +161,7 @@ class Form extends Component {
                         name="endDate"
                         placeholder="MM-DD-YYYY"
                         onChange={this.handleChange}
-                        value={this.state.endDate}
+                        value={this.state.fields.endDate}
                     >
                     </input>
                     <span className="validation">{this.state.errors.endDate}</span>
@@ -176,7 +175,7 @@ class Form extends Component {
                     type="text"
                     name="description"
                     onChange={this.handleChange}
-                    value={this.state.description}
+                    value={this.state.fields.description}
                 >
                 </textarea>
                 <div><input id="save" type="submit" value="Save" onClick={this.handleClick} /></div>
