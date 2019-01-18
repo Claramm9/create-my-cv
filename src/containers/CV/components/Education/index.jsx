@@ -16,6 +16,7 @@ class EducationComponent extends Component {
         const header = "Education";
         const isSimpleForm = false;
         const fields = Map({
+            id: this.props.education.length(),
             field1: "Center of Studies",
             field2: "Studies",
             startDate: "Start date",
@@ -27,7 +28,9 @@ class EducationComponent extends Component {
                 <Modal onConfirm={this.confirm} header={header} fields={fields} isSimpleForm={isSimpleForm}>
                     <button className="add">+</button>
                 </Modal>
-                <Display isSimpleForm={isSimpleForm} fields={fields} info={this.props.education}/>
+                {this.props.education.map(field => (
+                    <Display isSimpleForm={isSimpleForm} header={header} fields={fields} field={field} />
+                ))}
             </>
         );
     }

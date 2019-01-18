@@ -1,20 +1,44 @@
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import './styles.css';
 import { isEmpty, isValidDate } from './validator';
 
 class Form extends Component {
+    static propTypes = {
+        fields: PropTypes.instanceOf(Map),
+        info: PropTypes.instanceOf(List)
+    }
+
     constructor(props) {
         super(props);
-        
-        this.state = {
-            fields: {},
-            errors: {
-                field1: '',
-                field2: '',
-                startDate: '',
-                endDate: ''
+
+        if (this.props.info) {
+            this.state = {
+                fields: {
+                    field1: this.props.info.get('field1'),
+                    field2: this.props.info.get('field2'),
+                    startDate: this.props.info.get('startDate'),
+                    endDate: this.props.info.get('endDate'),
+                    description: this.props.info.get('description'),
+                },
+                errors: {
+                    field1: '',
+                    field2: '',
+                    startDate: '',
+                    endDate: ''
+                }
+            }
+        } else {
+            this.state = {
+                fields: {},
+                errors: {
+                    field1: '',
+                    field2: '',
+                    startDate: '',
+                    endDate: ''
+                }
             }
         }
     }
@@ -86,7 +110,7 @@ class Form extends Component {
                 endDate: this.state.fields.endDate,
                 description: this.state.fields.description
             });
-
+            debugger
             this.setState({
                 fields: {
                     field1: '',
@@ -103,6 +127,7 @@ class Form extends Component {
                 }
             });
             this.props.onConfirm(data);
+            debugger
         }
     }
     render() {

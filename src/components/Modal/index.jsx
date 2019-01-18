@@ -1,4 +1,4 @@
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -12,6 +12,7 @@ class Modal extends Component {
     }
     static propTypes = {
         fields: PropTypes.instanceOf(Map),
+        info: PropTypes.instanceOf(List),
         header: PropTypes.string.isRequired,
         isSimpleForm: PropTypes.bool.isRequired
     }
@@ -40,7 +41,7 @@ class Modal extends Component {
                         </div>
                         {this.props.isSimpleForm ? 
                             <SimpleForm onConfirm={this.confirm} /> : 
-                            <Form fields={fields} onConfirm={this.confirm}/>}
+                            <Form fields={fields} onConfirm={this.confirm} info={this.props.info} />}
                     </div>
                 </div>
                 <div onClick={() => this.setVisibility(true)}>
