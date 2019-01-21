@@ -12,6 +12,16 @@ class WorkExperienceComponent extends Component {
         this.props.addWork(data);
     }
 
+    update = (data) => {
+        const info = this.props.workExperience.map(field => {
+            return field.get('id') === data.get('id') ? 
+                field.set('id', data.get('id')).set('field1', data.get('field1')).set('field2', data.get('field2')).set('startDate', data.get('startDate')).set('endDate', data.get('endDate')).set('description', data.get('description')) 
+                : 
+                field
+        });
+        //this.props.updateField(info);
+    }
+
     render() {
         const header = "Work Experience";
         const isSimpleForm = false;
@@ -24,10 +34,18 @@ class WorkExperienceComponent extends Component {
         });
         return (
             <>
+                <h1>{header}</h1>
                 <Modal onConfirm={this.confirm} header={header} fields={fields} isSimpleForm={isSimpleForm}>
                     <button className="add">+</button>
                 </Modal>
-                <Display isSimpleForm={isSimpleForm} fields={fields} info={this.props.workExperience}/>
+                {this.props.workExperience.map(field => (
+                    <div key={field.get('id')} className="show-info">
+                        <Display isSimpleForm={isSimpleForm} fields={fields} info={this.props.workExperience} />
+                        <Modal onConfirm={this.update} fields={fields} info={field} header={header}>
+                            <button className="edit"><img src={pencil} alt="Edit" /></button>
+                        </Modal>
+                    </div>
+                ))}
             </>
         );
     }

@@ -11,18 +11,50 @@ class InformationComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            fields: {},
-            errors: {
-                name: '',
-                lastName: '',
-                direction: '',
-                number: '',
-                email: '',
-                birthday: '',
-                nationality: ''
-            }
-        };
+        if(this.props.info === "undefined"){
+            this.state = {
+                fields: {
+                    name: '',
+                    lastName: '',
+                    direction: '',
+                    number: '',
+                    email: '',
+                    birthday: '',
+                    nationality: ''
+                },
+                errors: {
+                    name: '',
+                    lastName: '',
+                    direction: '',
+                    number: '',
+                    email: '',
+                    birthday: '',
+                    nationality: ''
+                }
+            };
+        }else{
+            this.state = {
+                fields: {
+                    name: this.props.info.get('name'),
+                    lastName: this.props.info.get('lastName'),
+                    direction: this.props.info.get('direction'),
+                    number: this.props.info.get('number'),
+                    email: this.props.info.get('email'),
+                    birthday: this.props.info.get('birthday'),
+                    nationality: this.props.info.get('nationality'),
+                },
+                errors: {
+                    name: '',
+                    lastName: '',
+                    direction: '',
+                    number: '',
+                    email: '',
+                    birthday: '',
+                    nationality: ''
+                }
+            };
+        }
+
     }
     validateForm = () => {
         let fields = this.state.fields;
@@ -139,6 +171,7 @@ class InformationComponent extends Component {
     render() {
         return (
             <>
+                <h1>Information</h1>
                 <form>
                     <div className="form-row">
                         <label>
@@ -148,7 +181,7 @@ class InformationComponent extends Component {
                             <input
                                 type="text"
                                 name="name"
-                                value={this.props.info.get('name')}
+                                value={this.state.fields.name}
                                 onChange={this.handleChange}
                             >
                             </input>
@@ -161,7 +194,7 @@ class InformationComponent extends Component {
                             <input
                                 type="text"
                                 name="lastName"
-                                value={this.props.info.get('lastName')}
+                                value={this.state.fields.lastName}
                                 onChange={this.handleChange}
                             >
                             </input>
@@ -177,7 +210,7 @@ class InformationComponent extends Component {
                                 id="direction"
                                 type="text"
                                 name="direction"
-                                value={this.props.info.get('direction')}
+                                value={this.state.fields.direction}
                                 placeholder="Maria de Molina Street, 54, 28006 Madrid, Spain"
                                 onChange={this.handleChange}
                             >
@@ -194,7 +227,7 @@ class InformationComponent extends Component {
                                 type="text"
                                 name="number"
                                 placeholder="+34..."
-                                value={this.props.info.get('number')}
+                                value={this.state.fields.number}
                                 onChange={this.handleChange}
                             >
                             </input>
@@ -208,7 +241,7 @@ class InformationComponent extends Component {
                                 type="email"
                                 name="email"
                                 placeholder="....@..."
-                                value={this.props.info.get('email')}
+                                value={this.state.fields.email}
                                 onChange={this.handleChange}
                             >
                             </input>
@@ -224,7 +257,7 @@ class InformationComponent extends Component {
                                 type="text"
                                 name="birthday"
                                 placeholder="MM-DD-YYYY"
-                                value={this.props.info.get('birthday')}
+                                value={this.state.fields.birthday}
                                 onChange={this.handleChange}></input>
                             <span className="validation">{this.state.errors.birthday}</span>
                         </div>
@@ -235,7 +268,7 @@ class InformationComponent extends Component {
                             <input
                                 type="text"
                                 name="nationality"
-                                value={this.props.info.get('nationality')}
+                                value={this.state.fields.nationality}
                                 onChange={this.handleChange}
                             >
                             </input>

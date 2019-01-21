@@ -21,6 +21,7 @@ class RecommendationsComponent extends Component {
         const isSimpleForm = true;
         return (
             <>
+                <h1>{header}</h1>
                 <Modal onConfirm={this.confirm} header={header} isSimpleForm={isSimpleForm}>
                     <button className="add">+</button>
                 </Modal>

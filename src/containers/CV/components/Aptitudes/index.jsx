@@ -1,33 +1,93 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Map } from 'immutable';
 
+import './styles.css';
 import '../../styles.css';
-import { addAptitud } from '../../actions/index';
-import Modal from '../../../../components/Modal/index.jsx';
+import { addAptitud, deleteAptitud } from '../../actions/index';
 import Display from '../../../../components/Display/index.jsx';
+import { isEmpty } from '../../../../components/Modal/validator';
 
 class AptitudesComponent extends Component {
-    confirm = (data) => {
-        this.props.addAptitud(data);
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            aptitud: '',
+            error: ''
+        };
+    }
+
+    validateForm = () => {
+        let error = '';
+        let formIsValid = true;
+
+        if (isEmpty(this.state.aptitud)) {
+            formIsValid = false;
+            error = "*This field can not be empty.";
+        }
+        this.setState({
+            error: error
+        });
+        return formIsValid;
+    }
+
+    handleChange = (e) => {
+        this.setState({ aptitud: e.target.value });
+    }
+
+    handleClick = (e) => {
+        e.preventDefault();
+        if (this.validateForm()) {
+            const data =  Map({
+                id: this.props.aptitudes.size,
+                aptitud: this.state.aptitud
+            });
+            this.setState({
+                aptitud: '',
+                error: ''
+            })
+            this.props.addAptitud(data);
+        }
+    }
+
+    delete = (id) => {
+        const aptitudes = this.props.aptitudes.filter(aptitud => aptitud.get('id') !== id)
+        this.props.deleteAptitud(aptitudes);
     }
 
     render() {
         const header = "Aptitudes";
         const isSimpleForm = true;
         return (
-            <>
-                <Modal onConfirm={this.confirm} header={header} isSimpleForm={isSimpleForm}>
-                    <button className="add">+</button>
-                </Modal>
-                <Display isSimpleForm={isSimpleForm} info={this.props.aptitudes}/>
-            </>
+            <div className="aptitudes">
+                <h1>{header}</h1>
+                <div className="input-row">
+                    <input
+                        className="input-aptitude"
+                        type="text"
+                        name="aptitud"
+                        value={this.state.aptitud}
+                        onChange={this.handleChange}
+                    >
+                    </input>
+                    <button id="add" onClick={this.handleClick}>Add</button>
+                </div>
+                <span className="validation">{this.state.error}</span>
+                <div className="display-aptitudes">
+                    {this.props.aptitudes.map(field => (
+                        <Display key={field.get('id')} onDelete={this.delete} isSimpleForm={isSimpleForm} field={field} />
+                    ))}
+                </div>
+            </div>
         );
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        addAptitud: info => dispatch(addAptitud(info))
+        addAptitud: info => dispatch(addAptitud(info)),
+        deleteAptitud: aptitudes => dispatch(deleteAptitud(aptitudes))
     };
 }
 

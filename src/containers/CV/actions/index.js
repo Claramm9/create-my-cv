@@ -1,4 +1,4 @@
-import { ADD_INFO, ADD_EDUCATION, ADD_WORK, ADD_APTITUDE, ADD_RECOMMENDATION } from './actionTypes';
+import { ADD_INFO, ADD_EDUCATION, ADD_WORK, ADD_APTITUDE, ADD_RECOMMENDATION, UPDATE_FIELD, DELETE_APTITUDE } from './actionTypes';
 
 export const addInfo = info => ({
     type: ADD_INFO,
@@ -23,4 +23,14 @@ export const addAptitud = info => ({
 export const addRecommendation = info => ({
     type: ADD_RECOMMENDATION,
     payload: info
+});
+
+export const updateField = info => ({
+    type: UPDATE_FIELD,
+    payload: info
+});
+
+export const deleteAptitud = aptitudes => ({
+    type: DELETE_APTITUDE,
+    payload: aptitudes
 });

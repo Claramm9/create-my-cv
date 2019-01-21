@@ -24,6 +24,21 @@
     flex-direction: column;
   }
 
+  .edit {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: right;
+    border-radius: 15px;
+  }
+
+  .show-info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+  }
+
   /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}

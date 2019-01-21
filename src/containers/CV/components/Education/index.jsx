@@ -3,7 +3,8 @@ import { Map } from 'immutable';
 import { connect } from 'react-redux';
 
 import '../../styles.css';
-import { addEducation } from '../../actions/index';
+import { addEducation, updateField } from '../../actions/index';
+import pencil from '../../../../assets/icons/pencil.png';
 import Modal from '../../../../components/Modal/index.jsx';
 import Display from '../../../../components/Display/index.jsx';
 
@@ -12,11 +13,20 @@ class EducationComponent extends Component {
         this.props.addEducation(data);
     }
 
+    update = (data) => {
+        const info = this.props.education.map(field => {
+            return field.get('id') === data.get('id') ? 
+                field.set('id', data.get('id')).set('field1', data.get('field1')).set('field2', data.get('field2')).set('startDate', data.get('startDate')).set('endDate', data.get('endDate')).set('description', data.get('description')) 
+                : 
+                field
+        });
+        this.props.updateField(info);
+    }
+
     render() {
         const header = "Education";
         const isSimpleForm = false;
         const fields = Map({
-            id: this.props.education.length(),
             field1: "Center of Studies",
             field2: "Studies",
             startDate: "Start date",
@@ -25,11 +35,17 @@ class EducationComponent extends Component {
         });
         return (
             <>
+                <h1>{header}</h1>
                 <Modal onConfirm={this.confirm} header={header} fields={fields} isSimpleForm={isSimpleForm}>
                     <button className="add">+</button>
                 </Modal>
                 {this.props.education.map(field => (
-                    <Display isSimpleForm={isSimpleForm} header={header} fields={fields} field={field} />
+                    <div key={field.get('id')} className="show-info">
+                        <Display isSimpleForm={isSimpleForm} header={header} fields={fields} field={field} />
+                        <Modal onConfirm={this.update} fields={fields} info={field} header={header}>
+                            <button className="edit"><img src={pencil} alt="Edit" /></button>
+                        </Modal>
+                    </div>
                 ))}
             </>
         );
@@ -38,7 +54,8 @@ class EducationComponent extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addEducation: info => dispatch(addEducation(info))
+        addEducation: info => dispatch(addEducation(info)),
+        updateField: info => dispatch(updateField(info))
     };
 }
 

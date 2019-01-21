@@ -12,7 +12,7 @@ class Modal extends Component {
     }
     static propTypes = {
         fields: PropTypes.instanceOf(Map),
-        info: PropTypes.instanceOf(List),
+        info: PropTypes.instanceOf(Map),
         header: PropTypes.string.isRequired,
         isSimpleForm: PropTypes.bool.isRequired
     }

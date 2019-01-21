@@ -7,10 +7,37 @@
     padding-bottom: 10px;
 }
 
+.delete {
+    float: left;
+    border-style: none;
+    background-color: transparent;
+    margin-top: 4px;
+    font-weight: bold;
+}
+
 .field {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
     margin-left: 5px;
+    margin-right: 5px;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+.field-aptitud {
+    display: flex;
+    flex-direction: row;
+    border: 1px black solid; 
+    border-radius: 15px;
+    width: fit-content;
+    height: fit-content;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #resultado{
@@ -18,18 +45,3 @@
     height: 100%;
     border-style: none;
 }
-
-.show-info {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-bottom: 1px solid gray;
-  }
-  
-  .edit {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    float: right;
-    border-radius: 15px;
-  }
