@@ -1,18 +1,18 @@
 export default fields = [
     {
         id: 1,
-        label: 'Company',
-        name: 'company',
+        label: 'Center of Studies',
+        name: 'center',
         component: 'input',
-        placeholder: 'Company name',
+        placeholder: '',
         type: 'text'
     },
     {
         id: 2,
-        label: 'Position',
-        name: 'position',
+        label: 'Studies',
+        name: 'studies',
         component: 'input',
-        placeholder: 'Position',
+        placeholder: '',
         type: 'text'
     },
     {

@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './styles.css';
 import Sidebar from './components/Sidebar/index.jsx';
 import Header from '../../components/Header/index.jsx';
-import Education from './components/Education/index.jsx';
-import Aptitudes from './components/Aptitudes/index.jsx';
-import Information from './components/Information/index.jsx';
-import WorkExperience from './components/WorkExperience/index.jsx';
-import Recommendation from './components/Recommendations/index.jsx';
+import Education from './containers/Education/index.jsx';
+import Aptitudes from './containers/Aptitudes/index.jsx';
+import Information from './containers/Information/index.jsx';
+import WorkExperience from './containers/WorkExperience/index.jsx';
+import Recommendation from './containers/Recommendations/index.jsx';
 
 class CV extends Component {
     render() {
