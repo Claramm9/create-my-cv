@@ -44,7 +44,13 @@ const cvReducer = (state = initialStateCV, action) => {
             return state.update('recommendations', (recommendations) => recommendations.push(action.payload));
 
         case UPDATE_FIELD:
-            return state.set('education', action.payload);
+            if (action.title === 'education') {
+                return state.set('education', action.payload);
+            } else if (action.title === 'workExperience') {
+                return state.set('workExperience', action.payload);
+            } else if (action.title === 'recommendation') {
+                return state.set('recommendations', action.payload);
+            }
 
         case DELETE_APTITUDE:
             return state.set('aptitudes', action.payload);

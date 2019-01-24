@@ -1,18 +1,21 @@
 import React from 'react';
 
 import './styles.css';
-import Modal from '../Modal/index.jsx';
 
-const Display = ({ fields, field, isSimpleForm, header, onDelete}) => {
+const Display = ({ fields, field, isSimpleForm, onDelete}) => {
+    let display = true;
+    if(!(isSimpleForm)){
+        display = fields.get('startDate') === "" ? false : true;
+    }
     return (
         <>
             {!(isSimpleForm) ?
                     <div className="display">
                         <span className="field">{fields.get('field1')}: {field.get('field1')}</span>
                         <span className="field">{fields.get('field2')}: {field.get('field2')}</span>
-                        <span className="field">{fields.get('startDate')}: {field.get('startDate')}</span>
-                        <span className="field">{fields.get('endDate')}: {field.get('endDate')}</span>
-                        <span className="field">{fields.get('description')}: {field.get('description')}</span>
+                        { display ? <span className="field">{fields.get('startDate')}: {field.get('startDate')}</span> : null }
+                        { display ? <span className="field">{fields.get('endDate')}: {field.get('endDate')}</span> : null }
+                        { display ? <span className="field">{fields.get('description')}: {field.get('description')}</span> : null }
                     </div>
                 :
                 <div>

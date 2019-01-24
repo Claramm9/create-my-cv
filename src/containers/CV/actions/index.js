@@ -25,9 +25,10 @@ export const addRecommendation = info => ({
     payload: info
 });
 
-export const updateField = info => ({
+export const updateField = (info, title) => ({
     type: UPDATE_FIELD,
-    payload: info
+    payload: info,
+    title: title
 });
 
 export const deleteAptitud = aptitudes => ({

@@ -14,13 +14,14 @@ class EducationComponent extends Component {
     }
 
     update = (data) => {
+        const title = 'education';
         const info = this.props.education.map(field => {
             return field.get('id') === data.get('id') ? 
                 field.set('id', data.get('id')).set('field1', data.get('field1')).set('field2', data.get('field2')).set('startDate', data.get('startDate')).set('endDate', data.get('endDate')).set('description', data.get('description')) 
                 : 
                 field
         });
-        this.props.updateField(info);
+        this.props.updateField(info, title);
     }
 
     render() {
@@ -55,7 +56,7 @@ class EducationComponent extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         addEducation: info => dispatch(addEducation(info)),
-        updateField: info => dispatch(updateField(info))
+        updateField: (info, title) => dispatch(updateField(info, title))
     };
 }
 

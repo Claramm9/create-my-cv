@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 
 import '../../styles.css';
-import { addWork } from '../../actions/index';
+import { addWork, updateField } from '../../actions/index';
+import pencil from '../../../../assets/icons/pencil.png';
 import Modal from '../../../../components/Modal/index.jsx';
 import Display from '../../../../components/Display/index.jsx';
 
@@ -13,13 +14,14 @@ class WorkExperienceComponent extends Component {
     }
 
     update = (data) => {
+        const title = 'workExperience';
         const info = this.props.workExperience.map(field => {
             return field.get('id') === data.get('id') ? 
                 field.set('id', data.get('id')).set('field1', data.get('field1')).set('field2', data.get('field2')).set('startDate', data.get('startDate')).set('endDate', data.get('endDate')).set('description', data.get('description')) 
                 : 
                 field
         });
-        //this.props.updateField(info);
+        this.props.updateField(info, title);
     }
 
     render() {
@@ -40,7 +42,7 @@ class WorkExperienceComponent extends Component {
                 </Modal>
                 {this.props.workExperience.map(field => (
                     <div key={field.get('id')} className="show-info">
-                        <Display isSimpleForm={isSimpleForm} fields={fields} info={this.props.workExperience} />
+                        <Display isSimpleForm={isSimpleForm} fields={fields} field={field} />
                         <Modal onConfirm={this.update} fields={fields} info={field} header={header}>
                             <button className="edit"><img src={pencil} alt="Edit" /></button>
                         </Modal>
@@ -53,7 +55,8 @@ class WorkExperienceComponent extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addWork: info => dispatch(addWork(info))
+        addWork: info => dispatch(addWork(info)),
+        updateField: (info, title) => dispatch(updateField(info, title))
     };
 }
 

@@ -14,7 +14,7 @@ class Modal extends Component {
         fields: PropTypes.instanceOf(Map),
         info: PropTypes.instanceOf(Map),
         header: PropTypes.string.isRequired,
-        isSimpleForm: PropTypes.bool.isRequired
+        isSimpleForm: PropTypes.bool
     }
 
     setVisibility = (value) => {
@@ -40,7 +40,7 @@ class Modal extends Component {
                             <button style={{ float: "right" }} onClick={() => this.setVisibility(false)} title="Close" className="close">X</button>
                         </div>
                         {this.props.isSimpleForm ? 
-                            <SimpleForm onConfirm={this.confirm} /> : 
+                            <SimpleForm onConfirm={this.confirm} fields={fields} info={this.props.info} /> : 
                             <Form fields={fields} onConfirm={this.confirm} info={this.props.info} />}
                     </div>
                 </div>
