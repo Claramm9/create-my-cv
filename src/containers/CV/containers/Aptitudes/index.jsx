@@ -6,7 +6,7 @@ import './styles.css';
 import '../../styles.css';
 import { addAptitud, deleteAptitud } from '../../actions/index';
 import Display from '../../../../components/Display/index.jsx';
-import { isEmpty } from '../../../../components/Modal/validator';
+import { isEmpty } from '../../components/FormModal/validator';
 
 class AptitudesComponent extends Component {
     constructor(props) {
@@ -75,8 +75,8 @@ class AptitudesComponent extends Component {
                 </div>
                 <span className="validation">{this.state.error}</span>
                 <div className="display-aptitudes">
-                    {this.props.aptitudes.map(field => (
-                        <Display key={field.get('id')} onDelete={this.delete} isSimpleForm={isSimpleForm} field={field} />
+                    {this.props.aptitudes.map(data => (
+                        <Display key={data.get('id')} onDelete={this.delete} isSimpleForm={isSimpleForm} data={data} />
                     ))}
                 </div>
             </div>

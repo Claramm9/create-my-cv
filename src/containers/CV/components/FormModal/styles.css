@@ -1,0 +1,51 @@
+.modal-input {
+    width: 98%;
+    height: 30px;
+    margin-top: 5px;
+}
+
+.modal-label {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+#textarea {
+    width: 98%;
+    margin-left: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+#save {
+    float: right;
+    outline-style: none;
+    border-style: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #282c34;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    margin-right: 10px;
+    width: fit-content;
+}
+
+.personal-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.validation {
+    margin-top: 0px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    color: red;
+    font-size: 13px;
+    font-style: italic;
+}

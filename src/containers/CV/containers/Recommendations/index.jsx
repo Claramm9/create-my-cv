@@ -4,10 +4,11 @@ import { Map } from 'immutable';
 
 import './styles.css';
 import '../../styles.css';
-import { addRecommendation, updateField } from '../../actions';
+import { fields } from './models/index';
 import pencil from '../../../../assets/icons/pencil.png';
-import Modal from '../../../../components/Modal/index.jsx';
+import Modal from '../../components/Modal/index.jsx';
 import Display from '../../../../components/Display/index.jsx';
+import { addRecommendation, updateField } from '../../actions';
 
 class RecommendationsComponent extends Component {
     handleClick = (e) => {
@@ -48,25 +49,18 @@ class RecommendationsComponent extends Component {
     }
 
     render() {
-        const header = "Recommendations";
-        const fields = Map({
-            field1: "Name",
-            field2: "Recommendation",
-            startDate: "",
-            endDate: "",
-            description: ""
-        });
+        const header = "Create recommendations";
         const isSimpleForm = true;
         return (
             <>
-                <h1>{header}</h1>
+                <h1>Recommendation</h1>
                 <Modal onConfirm={this.confirm} header={header} fields={fields} isSimpleForm={isSimpleForm}>
                     <button className="add">+</button>
                 </Modal>
-                {this.props.recommendations.map(field => (
-                    <div key={field.get('id')} className="show-info">
-                    <Display isSimpleForm={false} fields={fields} header={header} field={field} />
-                    <Modal onConfirm={this.update} fields={fields} info={field} header={header} isSimpleForm={isSimpleForm}>
+                {this.props.recommendations.map(data => (
+                    <div key={data.get('id')} className="show-info">
+                    <Display isSimpleForm={false} fields={fields} header={header} data={data} />
+                    <Modal onConfirm={this.update} fields={fields} info={data} header={header} isSimpleForm={isSimpleForm}>
                             <button className="edit"><img src={pencil} alt="Edit" /></button>
                     </Modal>
                     </div>

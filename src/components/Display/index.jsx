@@ -2,26 +2,21 @@ import React from 'react';
 
 import './styles.css';
 
-const Display = ({ fields, field, isSimpleForm, onDelete}) => {
-    let display = true;
-    if(!(isSimpleForm)){
-        display = fields.get('startDate') === "" ? false : true;
-    }
+const Display = ({ fields, data, isSimpleForm, onDelete}) => {
+    
     return (
         <>
             {!(isSimpleForm) ?
                     <div className="display">
-                        <span className="field">{fields.get('field1')}: {field.get('field1')}</span>
-                        <span className="field">{fields.get('field2')}: {field.get('field2')}</span>
-                        { display ? <span className="field">{fields.get('startDate')}: {field.get('startDate')}</span> : null }
-                        { display ? <span className="field">{fields.get('endDate')}: {field.get('endDate')}</span> : null }
-                        { display ? <span className="field">{fields.get('description')}: {field.get('description')}</span> : null }
+                        {fields.map(field => (
+                        <span className="field">{field.label} {data.get(field.name)}</span>
+                        ))}
                     </div>
                 :
                 <div>
                     <span className="field-aptitud">
-                        <button className="delete" onClick={() => onDelete(field.get('id'))}>X</button>
-                        {field.get('aptitud')}
+                        <button className="delete" onClick={() => onDelete(data.get('id'))}>X</button>
+                        {data.get('aptitud')}
                     </span>
                 </div>
             }

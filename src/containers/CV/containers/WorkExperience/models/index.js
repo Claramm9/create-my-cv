@@ -1,23 +1,23 @@
-export default fields = [
+export const fields = [
     {
         id: 1,
-        label: 'Center of Studies',
-        name: 'center',
+        label: 'Company:',
+        name: 'company',
         component: 'input',
         placeholder: '',
         type: 'text'
     },
     {
         id: 2,
-        label: 'Studies',
-        name: 'studies',
+        label: 'Position:',
+        name: 'position',
         component: 'input',
         placeholder: '',
         type: 'text'
     },
     {
         id: 3,
-        label: 'Start Date',
+        label: 'Start Date:',
         name: 'startDate',
         component: 'input',
         placeholder: 'MM-DD-YYYY',
@@ -25,7 +25,7 @@ export default fields = [
     },
     {
         id: 4,
-        label: 'End Date',
+        label: 'End Date:',
         name: 'endDate',
         component: 'input',
         placeholder: 'MM-DD-YYYY',
@@ -33,7 +33,7 @@ export default fields = [
     },
     {
         id: 5,
-        label: 'Description',
+        label: 'Description:',
         name: 'description',
         component: 'textarea',
         placeholder: '',

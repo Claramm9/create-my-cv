@@ -1,12 +1,12 @@
-import { Map } from 'immutable';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 
 import '../../styles.css';
-import { addWork, updateField } from '../../actions/index';
+import { fields } from './models/index';
 import pencil from '../../../../assets/icons/pencil.png';
-import Modal from '../../../../components/Modal/index.jsx';
+import Modal from '../../components/Modal/index.jsx';
 import Display from '../../../../components/Display/index.jsx';
+import { addWork, updateField } from '../../actions/index';
 
 class WorkExperienceComponent extends Component {
     confirm = (data) => {
@@ -25,25 +25,19 @@ class WorkExperienceComponent extends Component {
     }
 
     render() {
-        const header = "Work Experience";
+        const header = "Create work experience";
         const isSimpleForm = false;
-        const fields = Map({
-            field1: "Company",
-            field2: "Position",
-            startDate: "Start date",
-            endDate: "End date",
-            description: "Description"
-        });
+
         return (
             <>
-                <h1>{header}</h1>
-                <Modal onConfirm={this.confirm} header={header} fields={fields} isSimpleForm={isSimpleForm}>
+                <h1>Work Experience</h1>
+                <Modal onConfirm={this.confirm} header={header} fields={fields}>
                     <button className="add">+</button>
                 </Modal>
-                {this.props.workExperience.map(field => (
-                    <div key={field.get('id')} className="show-info">
-                        <Display isSimpleForm={isSimpleForm} fields={fields} field={field} />
-                        <Modal onConfirm={this.update} fields={fields} info={field} header={header}>
+                {this.props.workExperience.map(data => (
+                    <div key={data.get('id')} className="show-info">
+                        <Display isSimpleForm={isSimpleForm} fields={fields} data={data} />
+                        <Modal onConfirm={this.update} fields={fields} info={data} header={header}>
                             <button className="edit"><img src={pencil} alt="Edit" /></button>
                         </Modal>
                     </div>

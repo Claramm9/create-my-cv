@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 import './styles.css';
 import { addInfo } from '../../actions/index';
-import { isEmpty, isEmailValid, isValidName, isValidDate, isValidNumber } from '../../../../components/Modal/validator';
+import { isEmpty, isEmailValid, isValidName, isValidDate, isValidNumber } from '../../components/FormModal/validator';
 
 class InformationComponent extends Component {
 

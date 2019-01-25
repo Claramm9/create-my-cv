@@ -1,4 +1,4 @@
-export default fields = [
+export const fields = [
     {
         id: 1,
         label: 'Name',
