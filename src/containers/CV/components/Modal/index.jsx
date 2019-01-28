@@ -13,7 +13,8 @@ class Modal extends Component {
         fields: PropTypes.array.isRequired,
         info: PropTypes.instanceOf(Map),
         header: PropTypes.string.isRequired,
-        isSimpleForm: PropTypes.bool
+        isSimpleForm: PropTypes.bool,
+        isEditing: PropTypes.bool.isRequired
     }
 
     setVisibility = (value) => {
@@ -38,7 +39,7 @@ class Modal extends Component {
                             <h2 style={{ float: "left" }}>{this.props.header}</h2>
                             <button style={{ float: "right" }} onClick={() => this.setVisibility(false)} title="Close" className="close">X</button>
                         </div>
-                        <FormModal onConfirm={this.confirm} fields={fields} info={this.props.info}/>
+                        <FormModal onConfirm={this.confirm} fields={fields} info={this.props.info} isEditing={this.props.isEditing}/>
                     </div>
                 </div>
                 <div onClick={() => this.setVisibility(true)}>

@@ -9,6 +9,7 @@ import Display from '../../../../components/Display/index.jsx';
 import { addEducation, updateField } from '../../actions/index';
 
 class EducationComponent extends Component {
+
     confirm = (data) => {
         this.props.addEducation(data);
     }
@@ -17,7 +18,7 @@ class EducationComponent extends Component {
         const title = 'education';
         const info = this.props.education.map(field => {
             return field.get('id') === data.get('id') ? 
-                field.set('id', data.get('id')).set('field1', data.get('field1')).set('field2', data.get('field2')).set('startDate', data.get('startDate')).set('endDate', data.get('endDate')).set('description', data.get('description')) 
+                field.set('id', data.get('id')).set('center', data.get('center')).set('studies', data.get('studies')).set('startDate', data.get('startDate')).set('endDate', data.get('endDate')).set('description', data.get('description')) 
                 : 
                 field
         });
@@ -30,13 +31,13 @@ class EducationComponent extends Component {
         return (
             <>
                 <h1>Education</h1>
-                <Modal onConfirm={this.confirm} header={header} fields={fields}>
+                <Modal onConfirm={this.confirm} header={header} fields={fields} isEditing={false}>
                     <button className="add">+</button>
                 </Modal>
                 {this.props.education.map(data => (
                     <div key={data.get('id')} className="show-info">
                         <Display isSimpleForm={isSimpleForm} header={header} fields={fields} data={data} />
-                        <Modal onConfirm={this.update} fields={fields} info={data} header={header}>
+                        <Modal onConfirm={this.update} fields={fields} info={data} header={header} isEditing={true}>
                             <button className="edit"><img src={pencil} alt="Edit" /></button>
                         </Modal>
                     </div>
