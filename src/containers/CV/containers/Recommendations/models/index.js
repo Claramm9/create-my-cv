@@ -1,7 +1,7 @@
 export const fields = [
     {
         id: 1,
-        label: 'Name',
+        label: 'Name:',
         name: 'name',
         component: 'input',
         placeholder: '',
@@ -9,7 +9,7 @@ export const fields = [
     },
     {
         id: 2,
-        label: 'Recommendation',
+        label: 'Recommendation:',
         name: 'recommendation',
         component: 'textarea',
         placeholder: '',

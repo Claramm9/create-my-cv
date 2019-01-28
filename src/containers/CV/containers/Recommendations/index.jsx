@@ -41,7 +41,7 @@ class RecommendationsComponent extends Component {
         const title = 'recommendation';
         const info = this.props.recommendations.map(field => {
             return field.get('id') === data.get('id') ? 
-                field.set('id', data.get('id')).set('field1', data.get('field1')).set('field2', data.get('field2')) 
+                field.set('id', data.get('id')).set('name', data.get('name')).set('recommendation', data.get('recommendation')) 
                 : 
                 field
         });
@@ -54,13 +54,13 @@ class RecommendationsComponent extends Component {
         return (
             <>
                 <h1>Recommendation</h1>
-                <Modal onConfirm={this.confirm} header={header} fields={fields} isSimpleForm={isSimpleForm}>
+                <Modal onConfirm={this.confirm} header={header} fields={fields} isSimpleForm={isSimpleForm} isEditing={false}>
                     <button className="add">+</button>
                 </Modal>
                 {this.props.recommendations.map(data => (
                     <div key={data.get('id')} className="show-info">
                     <Display isSimpleForm={false} fields={fields} header={header} data={data} />
-                    <Modal onConfirm={this.update} fields={fields} info={data} header={header} isSimpleForm={isSimpleForm}>
+                    <Modal onConfirm={this.update} fields={fields} info={data} header={header} isSimpleForm={isSimpleForm} isEditing={true}>
                             <button className="edit"><img src={pencil} alt="Edit" /></button>
                     </Modal>
                     </div>

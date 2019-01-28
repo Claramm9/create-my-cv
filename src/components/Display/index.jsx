@@ -7,13 +7,13 @@ const Display = ({ fields, data, isSimpleForm, onDelete}) => {
     return (
         <>
             {!(isSimpleForm) ?
-                    <div key={data.get('id')} className="display">
+                    <div className="display">
                         {fields.map(field => (
-                        <span className="field">{field.label} {data.get(field.name)}</span>
+                        <span key={field.id} className="field">{field.label} {data.get(field.name)}</span>
                         ))}
                     </div>
                 :
-                <div key={data.get('id')}>
+                <div>
                     <span className="field-aptitud">
                         <button className="delete" onClick={() => onDelete(data.get('id'))}>X</button>
                         {data.get('aptitud')}

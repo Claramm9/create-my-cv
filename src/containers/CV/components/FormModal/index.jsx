@@ -19,6 +19,7 @@ class FormModal extends Component {
                 fields: this.props.info.toObject(),
                 errors: {}
             }
+            
         } else {
             this.state = {
                 fields: {},
@@ -27,73 +28,27 @@ class FormModal extends Component {
         }
     }
 
-    validateForm = () => {
-        let fields = this.state.fields;
+    validateForm = (data) => {
+        let fields = this.props.fields;
         let errors = {};
 
-        console.log(fields)
         let formIsValid = true;
 
-        for (field in fields){
-            if (isEmpty(field)) {
-                errors[field] = "*This field can not be empty.";
-                formIsValid = false;
-            }
-            if(field === 'startDate' || field === 'endDate') {
-                if (!isValidDate(field)) {
-                    errors[field] = "*Please enter a valid format.";
+        fields.map(field => {
+            if (field.name !== 'description') {
+                if (isEmpty(data[field.name])) {
+                    errors[field.name] = "*This field can not be empty.";
                     formIsValid = false;
                 }
             }
-        }
-        // fields.map(field => (
-        //     (isEmpty(field) ?
-        //         errors[field] = "*This field can not be empty."
-        //         :
-        //         errors[field] = '')
+            if (field.name === 'startDate' || field.name === 'endDate') {
+                if (!isValidDate(data[field.name])) {
+                    errors[field.name] = "*Please enter a valid format.";
+                    formIsValid = false;
+                }
+            }
+        });
 
-        //         (field === 'startDate' || field === 'endDate' ?
-        //             isValidDate(field) ?
-        //                 errors[field] = ''
-        //                 :
-        //                 errors[field] = "*Please enter a valid format."
-        //             :
-        //             '')
-        // ));
-
-        // if (isEmpty(fields.field1)) {
-        //     formIsValid = false;
-        //     errors.field1 = "*This field can not be empty.";
-        // }
-
-        // if (isEmpty(fields.field2)) {
-        //     formIsValid = false;
-        //     errors.field2 = "*This field can not be empty.";
-        // }
-
-        // if (isEmpty(fields.startDate)) {
-        //     formIsValid = false;
-        //     errors.startDate = "*This field can not be empty.";
-        // }
-
-        // if (typeof fields.startDate !== "undefined") {
-        //     if (!isValidDate(fields.startDate)) {
-        //         formIsValid = false;
-        //         errors.startDate = "*Please enter a valid format.";
-        //     }
-        // }
-
-        // if (isEmpty(fields.endDate)) {
-        //     formIsValid = false;
-        //     errors.endDate = "*This field can not be empty.";
-        // }
-
-        // if (typeof fields.endDate !== "undefined") {
-        //     if (!isValidDate(fields.endDate)) {
-        //         formIsValid = false;
-        //         errors.endDate = "*Please enter a valid format.";
-        //     }
-        // }
         this.setState({
             errors: errors
         });
@@ -109,16 +64,17 @@ class FormModal extends Component {
 
     handleClick = (e) => {
         e.preventDefault();
+
         let fields = {};
+
         if (!this.props.isEditing) {
-            const uuid2 = require('uuid/v4');
+            const uuid = require('uuid/v4');
             fields = this.state.fields;
-            fields.id = uuid2();
+            fields.id = uuid();
             this.setState({
                 fields
             });
         } else {
-
             this.props.fields.map(field => (
                 typeof (this.state.fields[field.name]) === 'undefined' ?
                     fields[field.name] = this.props.info.get(field.name)
@@ -130,19 +86,23 @@ class FormModal extends Component {
                 fields
             });
         }
-        if (this.validateForm()) {
+        if (this.validateForm(fields)) {
             const data = Map(fields);
-            this.setState({
-                fields: {},
-                errors: {}
-            });
-
+            // let emptyFields = {}
+            // this.props.fields.map(field => (
+            //     emptyFields[field.name] = ''
+            // ))
+            // console.log(emptyFields)
+            // this.setState({
+            //     fields: emptyFields,
+            //     errors: {}
+            // })
+            
             this.props.onConfirm(data);
         }
     }
 
     render() {
-
         return (
             <form>
                 {this.props.fields.map(field => (
@@ -159,7 +119,7 @@ class FormModal extends Component {
                                     name={field.name}
                                     placeholder={field.placeholder}
                                     onChange={this.handleChange}
-                                    value={this.state.fields[field.name]}
+                                    value={this.state.fields[field.name]}   
                                 >
                                 </input>
                                 <span className="validation">{this.state.errors[field.name]}</span>
