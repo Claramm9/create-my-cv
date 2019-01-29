@@ -1,19 +1,51 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Map } from 'immutable';
 
 import './styles.css';
 import '../../styles.css';
 import { fields } from './models/index';
-import pencil from '../../../../assets/icons/pencil.png';
 import Modal from '../../components/Modal/index.jsx';
+import pencil from '../../../../assets/icons/pencil.png';
+import FormModal from '../../components/FormModal/index.jsx';
 import Display from '../../../../components/Display/index.jsx';
 import { addRecommendation, updateField } from '../../actions';
 
 class RecommendationsComponent extends Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            isVisible: false,
+            isEditing: false
+        }
+    }
+
+    handleAdd = () => {
+        this.changeVisibility(true);
+        this.changeEdition(false);
+    }
+
+    handleEditing = () => {
+        this.changeVisibility(true);
+        this.changeEdition(true);
+    }
+
+    changeVisibility = (value) => {
+        if (this.state.isVisible !== value) {
+            this.setState({ isVisible: value })
+        }
+    }
+
+    changeEdition = (value) => {
+        if (this.state.isEditing !== value) {
+            this.setState({ isEditing: value })
+        }
+    }
+
     handleClick = (e) => {
         e.preventDefault();
-        
+
         const information = this.props.Cv.get('information').toJS();
         const education = this.props.Cv.get('education').toJS();
         const workExperience = this.props.Cv.get('workExperience').toJS();
@@ -33,19 +65,22 @@ class RecommendationsComponent extends Component {
         console.log(recommendations);
     }
 
+    
     confirm = (data) => {
         this.props.addRecommendation(data);
+        this.changeVisibility(false);
     }
 
     update = (data) => {
         const title = 'recommendation';
         const info = this.props.recommendations.map(field => {
-            return field.get('id') === data.get('id') ? 
-                field.set('id', data.get('id')).set('name', data.get('name')).set('recommendation', data.get('recommendation')) 
-                : 
+            return field.get('id') === data.get('id') ?
+                field.set('id', data.get('id')).set('name', data.get('name')).set('recommendation', data.get('recommendation'))
+                :
                 field
         });
         this.props.updateField(info, title);
+        this.changeVisibility(false);
     }
 
     render() {
@@ -54,15 +89,17 @@ class RecommendationsComponent extends Component {
         return (
             <>
                 <h1>Recommendation</h1>
-                <Modal onConfirm={this.confirm} header={header} fields={fields} isSimpleForm={isSimpleForm} isEditing={false}>
-                    <button className="add">+</button>
+                <div><button className="add" onClick={this.handleAdd}>+</button></div>
+                <Modal onChangeVisibility={this.changeVisibility} isVisible={this.state.isVisible} header={header}>
+                    <FormModal onConfirm={this.confirm} fields={fields} isEditing={this.state.isEditing} />
                 </Modal>
                 {this.props.recommendations.map(data => (
                     <div key={data.get('id')} className="show-info">
-                    <Display isSimpleForm={false} fields={fields} header={header} data={data} />
-                    <Modal onConfirm={this.update} fields={fields} info={data} header={header} isSimpleForm={isSimpleForm} isEditing={true}>
-                            <button className="edit"><img src={pencil} alt="Edit" /></button>
-                    </Modal>
+                        <Display isSimpleForm={false} fields={fields} header={header} data={data} />
+                        <div><button className="edit" onClick={this.handleEditing}><img src={pencil} alt="Edit" /></button></div>
+                        <Modal onChangeVisibility={this.changeVisibility} isVisible={this.state.isVisible} header={header}>
+                            <FormModal onConfirm={this.update} fields={fields} info={data} isEditing={this.state.isEditing} />
+                        </Modal>
                     </div>
                 ))}
                 <div><button className="finish" onClick={this.handleClick}>Finish</button></div>

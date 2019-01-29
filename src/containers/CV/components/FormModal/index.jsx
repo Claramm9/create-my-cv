@@ -28,6 +28,22 @@ class FormModal extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.isEditing !== nextProps.isEditing){
+            if(this.props.isEditing){
+                this.setState({
+                    fields: {},
+                    errors: {}                
+                });
+            }else {
+                this.state = {
+                    fields: nextProps.info.toObject(),
+                    errors: {}
+                }
+            }
+        }
+    }
+
     validateForm = (data) => {
         let fields = this.props.fields;
         let errors = {};
