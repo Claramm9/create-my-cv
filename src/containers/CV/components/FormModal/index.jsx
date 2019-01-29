@@ -14,20 +14,13 @@ class FormModal extends Component {
     constructor(props) {
         super(props);
 
-        if (this.props.isEditing) {
-            this.state = {
-                fields: this.props.info.toObject(),
-                errors: {}
-            }
-
-        } else {
-            this.state = {
-                fields: {},
-                errors: {}
-            }
+        this.state = {
+            fields: props.info ? props.info.toObject() : {},
+            errors: {}
         }
     }
 
+    /*
     componentWillReceiveProps(nextProps) {
         if (this.props.isEditing !== nextProps.isEditing){
             if(this.props.isEditing){
@@ -36,13 +29,14 @@ class FormModal extends Component {
                     errors: {}                
                 });
             }else {
-                this.state = {
+                this.setState = ({
                     fields: nextProps.info.toObject(),
                     errors: {}
-                }
+                })
             }
         }
     }
+    */
 
     validateForm = (data) => {
         let fields = this.props.fields;
@@ -122,6 +116,7 @@ class FormModal extends Component {
     }
 
     render() {
+        console.log('FormModal render ');
         return (
             <form>
                 {this.props.fields.map(field => (

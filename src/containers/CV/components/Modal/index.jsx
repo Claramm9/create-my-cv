@@ -34,11 +34,16 @@ class Modal extends Component {
     }
 
     render() {
-        const displayModal = this.state.isVisible ? { display: 'block' } : { display: 'none' };
+        const { isVisible } = this.state;
+
+        if (!isVisible) return false;
+
+        console.log('modal render');
+        
         return (
             <>
-                <div className="modal" style={displayModal} onClick={() => this.setVisibility(false)}>
-                    <div className="modal-content" style={displayModal} onClick={e => e.stopPropagation()}>
+                <div className="modal" style={{ display: 'block' }} onClick={() => this.setVisibility(false)}>
+                    <div className="modal-content" style={{ display: 'block' }} onClick={e => e.stopPropagation()}>
                         <div className="modal-header">
                             <h2 style={{ float: "left" }}>{this.props.header}</h2>
                             <button style={{ float: "right" }} onClick={() => this.setVisibility(false)} title="Close" className="close">X</button>

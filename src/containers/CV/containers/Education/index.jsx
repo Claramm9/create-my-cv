@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import '../../styles.css';
 import { fields } from './models/index';
 import Modal from '../../components/Modal/index.jsx';
+import EducationItem from './components/EducationItem/index.jsx';
 import pencil from '../../../../assets/icons/pencil.png';
 import FormModal from '../../components/FormModal/index.jsx';
 import Display from '../../../../components/Display/index.jsx';
@@ -70,6 +71,12 @@ class EducationComponent extends Component {
                     <FormModal onConfirm={this.confirm} fields={fields} isEditing={this.state.isEditing} />
                 </Modal>
                 {this.props.education.map(data => (
+                    <EducationItem 
+                        isSimpleForm={isSimpleForm} 
+                        header={header} 
+                        fields={fields} 
+                        data={data}
+                        ></EducationItem>
                     <div key={data.get('id')} className="show-info">
                         <Display isSimpleForm={isSimpleForm} header={header} fields={fields} data={data} />
                         <div><button className="edit" onClick={this.handleEditing}><img src={pencil} alt="Edit" /></button></div>
