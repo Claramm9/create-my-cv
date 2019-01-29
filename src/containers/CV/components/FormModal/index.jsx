@@ -19,7 +19,7 @@ class FormModal extends Component {
                 fields: this.props.info.toObject(),
                 errors: {}
             }
-            
+
         } else {
             this.state = {
                 fields: {},
@@ -97,7 +97,10 @@ class FormModal extends Component {
             //     fields: emptyFields,
             //     errors: {}
             // })
-            
+            this.setState({
+                fields: {},
+                errors: {}
+            })
             this.props.onConfirm(data);
         }
     }
@@ -119,7 +122,7 @@ class FormModal extends Component {
                                     name={field.name}
                                     placeholder={field.placeholder}
                                     onChange={this.handleChange}
-                                    value={this.state.fields[field.name]}   
+                                    value={this.state.fields[field.name]}
                                 >
                                 </input>
                                 <span className="validation">{this.state.errors[field.name]}</span>
