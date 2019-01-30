@@ -4,10 +4,8 @@ import { connect } from 'react-redux';
 import '../../styles.css';
 import { fields } from './models/index';
 import Modal from '../../components/Modal/index.jsx';
-import EducationItem from './components/EducationItem/index.jsx';
-import pencil from '../../../../assets/icons/pencil.png';
+import ListItem from '../../components/ListItem/index.jsx';
 import FormModal from '../../components/FormModal/index.jsx';
-import Display from '../../../../components/Display/index.jsx';
 import { addEducation, updateField } from '../../actions/index';
 
 class EducationComponent extends Component {
@@ -67,23 +65,23 @@ class EducationComponent extends Component {
             <>
                 <h1>Education</h1>
                 <div><button className="add" onClick={this.handleAdd}>+</button></div>
-                <Modal onChangeVisibility={this.changeVisibility} isVisible={this.state.isVisible} header={header}>
-                    <FormModal onConfirm={this.confirm} fields={fields} isEditing={this.state.isEditing} />
-                </Modal>
+                {this.state.isEditing ? null
+                    :
+                    <Modal onChangeVisibility={this.changeVisibility} isVisible={this.state.isVisible} header={header}>
+                        <FormModal onConfirm={this.confirm} fields={fields} isEditing={this.state.isEditing} />
+                    </Modal>
+                }
                 {this.props.education.map(data => (
-                    <EducationItem 
-                        isSimpleForm={isSimpleForm} 
-                        header={header} 
-                        fields={fields} 
+                    <ListItem
+                        key={data.get('id')}
+                        isSimpleForm={isSimpleForm}
+                        header={header}
+                        fields={fields}
                         data={data}
-                        ></EducationItem>
-                    <div key={data.get('id')} className="show-info">
-                        <Display isSimpleForm={isSimpleForm} header={header} fields={fields} data={data} />
-                        <div><button className="edit" onClick={this.handleEditing}><img src={pencil} alt="Edit" /></button></div>
-                        <Modal onChangeVisibility={this.changeVisibility} isVisible={this.state.isVisible}  header={header}>
-                            <FormModal onConfirm={this.update} fields={fields} info={data} isEditing={this.state.isEditing} /> 
-                        </Modal>
-                    </div>
+                        isEditing={this.state.isEditing}
+                        onConfirm={this.update}
+                        onEditing={this.handleEditing}
+                    ></ListItem>
                 ))}
             </>
         );

@@ -20,24 +20,6 @@ class FormModal extends Component {
         }
     }
 
-    /*
-    componentWillReceiveProps(nextProps) {
-        if (this.props.isEditing !== nextProps.isEditing){
-            if(this.props.isEditing){
-                this.setState({
-                    fields: {},
-                    errors: {}                
-                });
-            }else {
-                this.setState = ({
-                    fields: nextProps.info.toObject(),
-                    errors: {}
-                })
-            }
-        }
-    }
-    */
-
     validateForm = (data) => {
         let fields = this.props.fields;
         let errors = {};
@@ -98,15 +80,7 @@ class FormModal extends Component {
         }
         if (this.validateForm(fields)) {
             const data = Map(fields);
-            // let emptyFields = {}
-            // this.props.fields.map(field => (
-            //     emptyFields[field.name] = ''
-            // ))
-            // console.log(emptyFields)
-            // this.setState({
-            //     fields: emptyFields,
-            //     errors: {}
-            // })
+            
             this.setState({
                 fields: {},
                 errors: {}

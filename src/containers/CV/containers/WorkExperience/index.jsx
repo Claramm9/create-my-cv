@@ -4,10 +4,9 @@ import React, { Component } from 'react';
 import '../../styles.css';
 import { fields } from './models/index';
 import Modal from '../../components/Modal/index.jsx';
-import pencil from '../../../../assets/icons/pencil.png';
+import ListItem from '../../components/ListItem/index.jsx';
 import { addWork, updateField } from '../../actions/index';
 import FormModal from '../../components/FormModal/index.jsx';
-import Display from '../../../../components/Display/index.jsx';
 
 class WorkExperienceComponent extends Component {
 
@@ -66,17 +65,23 @@ class WorkExperienceComponent extends Component {
             <>
                 <h1>Work Experience</h1>
                 <div><button className="add" onClick={this.handleAdd}>+</button></div>
-                <Modal onChangeVisibility={this.changeVisibility} isVisible={this.state.isVisible} header={header}>
-                    <FormModal onConfirm={this.confirm} fields={fields} isEditing={this.state.isEditing} />
-                </Modal>
+                {this.state.isEditing ? null
+                    :
+                    <Modal onChangeVisibility={this.changeVisibility} isVisible={this.state.isVisible} header={header}>
+                        <FormModal onConfirm={this.confirm} fields={fields} isEditing={this.state.isEditing} />
+                    </Modal>
+                }
                 {this.props.workExperience.map(data => (
-                    <div key={data.get('id')} className="show-info">
-                        <Display isSimpleForm={isSimpleForm} fields={fields} data={data} />
-                        <div><button className="edit" onClick={this.handleEditing}><img src={pencil} alt="Edit" /></button></div>
-                        <Modal onChangeVisibility={this.changeVisibility} isVisible={this.state.isVisible} header={header}>
-                            <FormModal onConfirm={this.update} fields={fields} info={data} isEditing={this.state.isEditing} />
-                        </Modal>
-                    </div>
+                    <ListItem
+                        key={data.get('id')}
+                        isSimpleForm={isSimpleForm}
+                        header={header}
+                        fields={fields}
+                        data={data}
+                        isEditing={this.state.isEditing}
+                        onConfirm={this.update}
+                        onEditing={this.handleEditing}
+                    ></ListItem>
                 ))}
             </>
         );
