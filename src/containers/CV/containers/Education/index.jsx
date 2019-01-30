@@ -61,28 +61,38 @@ class EducationComponent extends Component {
     render() {
         const header = "Create education";
         const isSimpleForm = false;
+        const modalAdd = this.state.isEditing ?
+            null
+            :
+            <Modal
+                onChangeVisibility={this.changeVisibility}
+                isVisible={this.state.isVisible}
+                header={header}
+            >
+                <FormModal
+                    onConfirm={this.confirm}
+                    fields={fields}
+                    isEditing={this.state.isEditing} />
+            </Modal>
+
+        const listItems = this.props.education.map(data => (
+            <ListItem
+                key={data.get('id')}
+                isSimpleForm={isSimpleForm}
+                header={header}
+                fields={fields}
+                data={data}
+                isEditing={this.state.isEditing}
+                onConfirm={this.update}
+                onEditing={this.handleEditing}
+            ></ListItem>
+        ))
         return (
             <>
                 <h1>Education</h1>
                 <div><button className="add" onClick={this.handleAdd}>+</button></div>
-                {this.state.isEditing ? null
-                    :
-                    <Modal onChangeVisibility={this.changeVisibility} isVisible={this.state.isVisible} header={header}>
-                        <FormModal onConfirm={this.confirm} fields={fields} isEditing={this.state.isEditing} />
-                    </Modal>
-                }
-                {this.props.education.map(data => (
-                    <ListItem
-                        key={data.get('id')}
-                        isSimpleForm={isSimpleForm}
-                        header={header}
-                        fields={fields}
-                        data={data}
-                        isEditing={this.state.isEditing}
-                        onConfirm={this.update}
-                        onEditing={this.handleEditing}
-                    ></ListItem>
-                ))}
+                {modalAdd}
+                {listItems}
             </>
         );
     }

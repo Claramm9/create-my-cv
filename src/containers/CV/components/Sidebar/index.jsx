@@ -1,7 +1,8 @@
-import './styles.css';
-
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
+
+import './styles.css';
+import Check from '../Check/index.jsx';
 
 const Sidebar = () => {
     return (
@@ -15,6 +16,7 @@ const Sidebar = () => {
                     >
                         Personal Information
                     </NavLink>
+                    <Check  className="check"/>
                 </li>
                 <li>
                     <NavLink
@@ -24,6 +26,7 @@ const Sidebar = () => {
                     >
                         Education
                     </NavLink>
+                    <Check  className="check"/>
                 </li>
                 <li>
                     <NavLink
@@ -33,6 +36,7 @@ const Sidebar = () => {
                     >
                         Work Experience
                     </NavLink>
+                    <Check  className="check"/>
                 </li>
                 <li>
                     <NavLink
@@ -42,6 +46,7 @@ const Sidebar = () => {
                     >
                         Aptitudes
                     </NavLink>
+                    <Check  className="check"/>
                 </li>
                 <li>
                     <NavLink
@@ -51,6 +56,7 @@ const Sidebar = () => {
                     >
                         Recommendation
                      </NavLink>
+                     <Check  className="check"/>
                 </li>
             </ul>
         </div>

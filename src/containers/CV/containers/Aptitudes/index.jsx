@@ -39,7 +39,7 @@ class AptitudesComponent extends Component {
     handleClick = (e) => {
         e.preventDefault();
         if (this.validateForm()) {
-            const data =  Map({
+            const data = Map({
                 id: this.props.aptitudes.size,
                 aptitud: this.state.aptitud
             });
@@ -76,7 +76,12 @@ class AptitudesComponent extends Component {
                 <span className="validation">{this.state.error}</span>
                 <div className="display-aptitudes">
                     {this.props.aptitudes.map(data => (
-                        <Display key={data.get('id')} onDelete={this.delete} isSimpleForm={isSimpleForm} data={data} />
+                        <Display
+                            key={data.get('id')}
+                            onDelete={this.delete}
+                            isSimpleForm={isSimpleForm}
+                            data={data} 
+                        />
                     ))}
                 </div>
             </div>
