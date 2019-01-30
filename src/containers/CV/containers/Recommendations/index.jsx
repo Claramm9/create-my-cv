@@ -45,23 +45,50 @@ class RecommendationsComponent extends Component {
     handleClick = (e) => {
         e.preventDefault();
 
-        const information = this.props.Cv.get('information').toJS();
-        const education = this.props.Cv.get('education').toJS();
-        const workExperience = this.props.Cv.get('workExperience').toJS();
-        const aptitudes = this.props.Cv.get('aptitudes').toJS();
-        const recommendations = this.props.Cv.get('recommendations').toJS();
+        const information = this.props.Cv.get('information');
+        const education = this.props.Cv.get('education');
+        const workExperience = this.props.Cv.get('workExperience');
+        const aptitudes = this.props.Cv.get('aptitudes');
+        const recommendations = this.props.Cv.get('recommendations');
 
         console.log("CV:");
         console.log("Personal Information:");
-        console.log(information);
+        console.log("Nombre: " + information.get('name'));
+        console.log("Apellido: " + information.get('lastName'));
+        console.log("Dirección: " + information.get('address'));
+        console.log("Teléfono: " + information.get('number'));
+        console.log("Email: " + information.get('email'));
+        console.log("Birthday: " + information.get('birthday'));
+        console.log("Nationality: " + information.get('nationality'));
+
         console.log("Education:");
-        console.log(education);
+        education.map(field => {
+            console.log("Centro estudios: " + field.get('center'))
+            console.log("Estudios: " + field.get('studies'))
+            console.log("Fecha inicio: " + field.get('startDate'))
+            console.log("Fecha fin: " + field.get('endDate'))
+            console.log("Description: " + field.get('description'))
+        })
+
         console.log("Work Experience:");
-        console.log(workExperience);
+        workExperience.map(field => {
+            console.log("Compañia: " + field.get('company'))
+            console.log("Puesto: " + field.get('position'))
+            console.log("Fecha inicio: " + field.get('startDate'))
+            console.log("Fecha fin: " + field.get('endDate'))
+            console.log("Description: " + field.get('description'))
+        })
+        
         console.log("Aptitudes:");
-        console.log(aptitudes);
+        aptitudes.map(field => {
+            console.log(field.get('aptitud'))
+        })
+
         console.log("Recommendations:");
-        console.log(recommendations);
+        recommendations.map(field => {
+            console.log("Nombre: " + field.get('name'))
+            console.log("Recomendación: " + field.get('recommendation'))
+        })
     }
 
 

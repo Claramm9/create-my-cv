@@ -16,7 +16,7 @@ class InformationComponent extends Component {
                 fields: {
                     name: '',
                     lastName: '',
-                    direction: '',
+                    address: '',
                     number: '',
                     email: '',
                     birthday: '',
@@ -25,7 +25,7 @@ class InformationComponent extends Component {
                 errors: {
                     name: '',
                     lastName: '',
-                    direction: '',
+                    address: '',
                     number: '',
                     email: '',
                     birthday: '',
@@ -37,7 +37,7 @@ class InformationComponent extends Component {
                 fields: {
                     name: this.props.info.get('name'),
                     lastName: this.props.info.get('lastName'),
-                    direction: this.props.info.get('direction'),
+                    address: this.props.info.get('address'),
                     number: this.props.info.get('number'),
                     email: this.props.info.get('email'),
                     birthday: this.props.info.get('birthday'),
@@ -46,7 +46,7 @@ class InformationComponent extends Component {
                 errors: {
                     name: '',
                     lastName: '',
-                    direction: '',
+                    address: '',
                     number: '',
                     email: '',
                     birthday: '',
@@ -61,7 +61,7 @@ class InformationComponent extends Component {
         let errors = {
             name: '',
             lastName: '',
-            direction: '',
+            address: '',
             number: '',
             email: '',
             birthday: '',
@@ -116,9 +116,9 @@ class InformationComponent extends Component {
             }
         }
 
-        if (isEmpty(fields.direction)) {
+        if (isEmpty(fields.address)) {
             formIsValid = false;
-            errors.direction = "*Please enter your direction.";
+            errors.address = "*Please enter your address.";
         }
 
         if (isEmpty(fields.birthday)) {
@@ -158,7 +158,7 @@ class InformationComponent extends Component {
             const info = Map({
                 name: this.state.fields.name,
                 lastName: this.state.fields.lastName,
-                direction: this.state.fields.direction,
+                address: this.state.fields.address,
                 number: this.state.fields.number,
                 email: this.state.fields.email,
                 birthday: this.state.fields.birthday,
@@ -203,19 +203,19 @@ class InformationComponent extends Component {
                     </div>
                     <div className="form-row">
                         <label>
-                            Direction:
+                            Address:
                             </label>
                         <div className="personal-field">
                             <input
-                                id="direction"
+                                id="address"
                                 type="text"
-                                name="direction"
-                                value={this.state.fields.direction}
+                                name="address"
+                                value={this.state.fields.address}
                                 placeholder="Maria de Molina Street, 54, 28006 Madrid, Spain"
                                 onChange={this.handleChange}
                             >
                             </input>
-                            <span className="validation">{this.state.errors.direction}</span>
+                            <span className="validation">{this.state.errors.address}</span>
                         </div>
                     </div>
                     <div className="form-row">
