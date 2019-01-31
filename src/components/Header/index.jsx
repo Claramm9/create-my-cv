@@ -1,11 +1,24 @@
 import './styles.css';
 import React from 'react';
 
-const Header = () =>  {
+const Header = ({ downloadBut, onDownload }) => {
     return (
-        <nav>
-            CREATE YOUR CV
-        </nav>
+        <div className="header">
+            <nav>
+                CREATE YOUR CV
+                </nav>
+            {downloadBut &&
+                <div className="downloadDiv">
+                    <button
+                        className="download"
+                        onClick={onDownload}
+                    >
+                        Download
+                    </button>
+                </div>
+            }
+        </div>
+
     );
 };
 

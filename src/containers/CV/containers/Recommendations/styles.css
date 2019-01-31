@@ -10,17 +10,3 @@
 .add:hover {
     background-color: #F0F0F0;
 }
-
-.finish {
-    float: right;
-    outline-style: none;
-    border-style: none;
-    border-radius: 5px;
-    color: white;
-    background-color: #282c34;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-top: 50px;
-    margin-right: 10px;
-    width: fit-content;
-}

@@ -165,7 +165,9 @@ class InformationComponent extends Component {
                 nationality: this.state.fields.nationality
             });
             this.props.addInfo(info);
+            this.props.isCompleted('infoCompleted', true);
             alert("Saved!");
+            
         }
     }
     render() {

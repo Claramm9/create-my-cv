@@ -4,7 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import './styles.css';
 import Check from '../Check/index.jsx';
 
-const Sidebar = () => {
+const Sidebar = ({ flags }) => {
     return (
         <div className="sidenav">
             <ul>
@@ -16,47 +16,47 @@ const Sidebar = () => {
                     >
                         Personal Information
                     </NavLink>
-                    <Check  className="check"/>
+                    {flags.infoCompleted && <Check className="check"/>}
                 </li>
                 <li>
-                    <NavLink
+                    {flags.infoCompleted && <NavLink
                         to="/CV/education"
                         className="sidebar-item"
                         activeStyle={{ color: '#f1f1f1' }}
                     >
                         Education
-                    </NavLink>
-                    <Check  className="check"/>
+                    </NavLink>}
+                    {flags.eduCompleted && <Check className="check"/>}
                 </li>
                 <li>
-                    <NavLink
+                    {flags.eduCompleted && <NavLink
                         to="/CV/work-experience"
                         className="sidebar-item"
                         activeStyle={{ color: '#f1f1f1' }}
                     >
                         Work Experience
-                    </NavLink>
-                    <Check  className="check"/>
+                    </NavLink>}
+                    {flags.workCompleted && <Check className="check"/>}
                 </li>
                 <li>
-                    <NavLink
+                    {flags.workCompleted && <NavLink
                         to="/CV/aptitudes"
                         className="sidebar-item"
                         activeStyle={{ color: '#f1f1f1' }}
                     >
                         Aptitudes
-                    </NavLink>
-                    <Check  className="check"/>
+                    </NavLink>}
+                    {flags.aptitudCompleted && <Check className="check"/>}
                 </li>
                 <li>
-                    <NavLink
+                    {flags.aptitudCompleted && <NavLink
                         to="/CV/recommendation"
                         className="sidebar-item"
                         activeStyle={{ color: '#f1f1f1' }}
                     >
                         Recommendation
-                     </NavLink>
-                     <Check  className="check"/>
+                     </NavLink>}
+                     {flags.recomCompleted && <Check className="check"/>}
                 </li>
             </ul>
         </div>

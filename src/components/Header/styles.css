@@ -1,4 +1,7 @@
 nav {
+}
+
+.header {
   background-color: #282c34;
   width: 100%;
   z-index: 1;
@@ -11,4 +14,18 @@ nav {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.downloadDiv {
+  float: right;
+  margin-left: 20px;
+}
+
+.download {
+  outline-style: none;
+  border-style: none;
+  border-radius: 5px;
+  color: #282c34;
+  background-color: white;
+  width: fit-content;
 }

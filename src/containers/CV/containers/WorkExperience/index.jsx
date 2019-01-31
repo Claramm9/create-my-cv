@@ -43,6 +43,7 @@ class WorkExperienceComponent extends Component {
     confirm = (data) => {
         this.props.addWork(data);
         this.changeVisibility(false);
+        this.props.isCompleted('workCompleted', true);
     }
 
     update = (data) => {

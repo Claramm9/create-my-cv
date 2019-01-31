@@ -44,6 +44,7 @@ class EducationComponent extends Component {
     confirm = (data) => {
         this.props.addEducation(data);
         this.changeVisibility(false);
+        this.props.isCompleted('eduCompleted', true);
     }
 
     update = (data) => {

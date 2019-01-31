@@ -48,12 +48,25 @@ class AptitudesComponent extends Component {
                 error: ''
             })
             this.props.addAptitud(data);
+
+            if(this.props.aptitudes.count() > 1){
+                this.props.isCompleted('aptitudCompleted', true);
+            }else{
+                this.props.isCompleted('aptitudCompleted', false);
+            }
         }
     }
 
     delete = (id) => {
         const aptitudes = this.props.aptitudes.filter(aptitud => aptitud.get('id') !== id)
         this.props.deleteAptitud(aptitudes);
+
+        if(this.props.aptitudes.count() > 3){
+            this.props.isCompleted('aptitudCompleted', true);
+        }else{
+            this.props.isCompleted('aptitudCompleted', false);
+            this.props.onDelete();
+        }
     }
 
     render() {
