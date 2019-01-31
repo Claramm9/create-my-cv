@@ -90,7 +90,7 @@ class CV extends Component {
         return (
             <Router>
                 <div>
-                    <Header downloadBut={this.state.allCompleted} onDownload={this.handleDownload} />
+                    <Header downloadButton={this.state.allCompleted} onDownload={this.handleDownload} />
                     <div className="wrapper">
                         <Sidebar flags={this.state} />
                         <div className="main">

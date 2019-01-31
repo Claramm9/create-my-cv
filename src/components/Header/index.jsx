@@ -1,13 +1,13 @@
 import './styles.css';
 import React from 'react';
 
-const Header = ({ downloadBut, onDownload }) => {
+const Header = ({ downloadButton, onDownload }) => {
     return (
         <div className="header">
             <nav>
                 CREATE YOUR CV
                 </nav>
-            {downloadBut &&
+            {downloadButton &&
                 <div className="downloadDiv">
                     <button
                         className="download"
