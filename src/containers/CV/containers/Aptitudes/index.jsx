@@ -40,7 +40,7 @@ class AptitudesComponent extends Component {
         e.preventDefault();
         if (this.validateForm()) {
             const data = Map({
-                id: this.props.aptitudes.size,
+                id: this.props.aptitudes.size + 1,
                 aptitud: this.state.aptitud
             });
             this.setState({

@@ -14,6 +14,7 @@ class InformationComponent extends Component {
         if(this.props.info === "undefined"){
             this.state = {
                 fields: {
+                    id: 1,
                     name: '',
                     lastName: '',
                     address: '',
@@ -35,6 +36,7 @@ class InformationComponent extends Component {
         }else{
             this.state = {
                 fields: {
+                    id: this.props.info.get('id'),
                     name: this.props.info.get('name'),
                     lastName: this.props.info.get('lastName'),
                     address: this.props.info.get('address'),
@@ -156,6 +158,7 @@ class InformationComponent extends Component {
         e.preventDefault();
         if (this.validateForm()) {
             const info = Map({
+                id: 1,
                 name: this.state.fields.name,
                 lastName: this.state.fields.lastName,
                 address: this.state.fields.address,

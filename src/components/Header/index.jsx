@@ -6,7 +6,7 @@ const Header = ({ downloadButton, onDownload }) => {
         <div className="header">
             <nav>
                 CREATE YOUR CV
-                </nav>
+            </nav>
             {downloadButton &&
                 <div className="downloadDiv">
                     <button

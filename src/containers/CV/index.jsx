@@ -37,6 +37,21 @@ class CV extends Component {
         this.setState({ allCompleted: false })
     }
 
+    writeJSON = (data, info) =>
+        fetch(`http://localhost:3000/${info}`, {
+            "body": JSON.stringify(data),
+            "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            "method": "POST"
+        }).then((response) => response.json());
+
+    deleteJSON = (info, id) =>
+        fetch(`http://localhost:3000/${info}/${id}`,
+            {"method": "DELETE"}
+        ).then((response) => response.json());
+
     handleDownload = (e) => {
         e.preventDefault();
 
@@ -46,44 +61,36 @@ class CV extends Component {
         const aptitudes = this.props.Cv.get('aptitudes');
         const recommendations = this.props.Cv.get('recommendations');
 
-        console.log("CV:");
-        console.log("Personal Information:");
-        console.log("Nombre: " + information.get('name'));
-        console.log("Apellido: " + information.get('lastName'));
-        console.log("Dirección: " + information.get('address'));
-        console.log("Teléfono: " + information.get('number'));
-        console.log("Email: " + information.get('email'));
-        console.log("Birthday: " + information.get('birthday'));
-        console.log("Nationality: " + information.get('nationality'));
+        this.deleteJSON('information', information.get('id'));
+        education.map(field => (
+            this.deleteJSON('education', field.get('id'))
+        ));
+        workExperience.map(field => (
+            this.deleteJSON('workExperience', field.get('id'))
+        ));
+        aptitudes.map(field => (
+            this.deleteJSON('aptitudes', field.get('id'))
+        ));
+        recommendations.map(field => (
+            this.deleteJSON('recommendation', field.get('id'))
+        ));
+        
+        this.writeJSON(information.toJS(), 'information');
+        education.map(field => (
+            this.writeJSON(field.toJS(), 'education')
+        ));
 
-        console.log("Education:");
-        education.map(field => {
-            console.log("Centro estudios: " + field.get('center'))
-            console.log("Estudios: " + field.get('studies'))
-            console.log("Fecha inicio: " + field.get('startDate'))
-            console.log("Fecha fin: " + field.get('endDate'))
-            console.log("Description: " + field.get('description'))
-        })
+        workExperience.map(field => (
+            this.writeJSON(field.toJS(), 'workExperience')
+        ));
 
-        console.log("Work Experience:");
-        workExperience.map(field => {
-            console.log("Compañia: " + field.get('company'))
-            console.log("Puesto: " + field.get('position'))
-            console.log("Fecha inicio: " + field.get('startDate'))
-            console.log("Fecha fin: " + field.get('endDate'))
-            console.log("Description: " + field.get('description'))
-        })
+        aptitudes.map(field => (
+            this.writeJSON(field.toJS(), 'aptitudes')
+        ));
 
-        console.log("Aptitudes:");
-        aptitudes.map(field => {
-            console.log(field.get('aptitud'))
-        })
-
-        console.log("Recommendations:");
-        recommendations.map(field => {
-            console.log("Nombre: " + field.get('name'))
-            console.log("Recomendación: " + field.get('recommendation'))
-        })
+        recommendations.map(field => (
+            this.writeJSON(field.toJS(), 'recommendation')
+        ));
     }
 
     render() {
