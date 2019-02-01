@@ -37,8 +37,6 @@ class Modal extends Component {
         const { isVisible } = this.state;
 
         if (!isVisible) return false;
-
-        console.log('modal render');
         
         return (
             <>

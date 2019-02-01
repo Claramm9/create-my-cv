@@ -47,34 +47,27 @@ class CV extends Component {
             "method": "POST"
         }).then((response) => response.json());
 
-    deleteJSON = (info, id) =>
-        fetch(`http://localhost:3000/${info}/${id}`,
-            {"method": "DELETE"}
-        ).then((response) => response.json());
+    deleteJSON = (info) => {
+        fetch(`http://localhost:3000/${info}`)
+        .then(resp => resp.json())
+        .then(data => {
+            data.map(field => {
+                fetch(`http://localhost:3000/${info}/${field.id}`, 
+                    {"method": "DELETE"}
+                ).then((response) => response.json());
+            })
+        });
+    }
 
-    handleDownload = (e) => {
-        e.preventDefault();
+    deleteAll = () => {
+        this.deleteJSON('information');
+        this.deleteJSON('education');
+        this.deleteJSON('workExperience');
+        this.deleteJSON('aptitudes');
+        this.deleteJSON('recommendation');
+    }
 
-        const information = this.props.Cv.get('information');
-        const education = this.props.Cv.get('education');
-        const workExperience = this.props.Cv.get('workExperience');
-        const aptitudes = this.props.Cv.get('aptitudes');
-        const recommendations = this.props.Cv.get('recommendations');
-
-        this.deleteJSON('information', information.get('id'));
-        education.map(field => (
-            this.deleteJSON('education', field.get('id'))
-        ));
-        workExperience.map(field => (
-            this.deleteJSON('workExperience', field.get('id'))
-        ));
-        aptitudes.map(field => (
-            this.deleteJSON('aptitudes', field.get('id'))
-        ));
-        recommendations.map(field => (
-            this.deleteJSON('recommendation', field.get('id'))
-        ));
-        
+    writeAll = (information, education, workExperience, aptitudes, recommendations) => {
         this.writeJSON(information.toJS(), 'information');
         education.map(field => (
             this.writeJSON(field.toJS(), 'education')
@@ -91,6 +84,20 @@ class CV extends Component {
         recommendations.map(field => (
             this.writeJSON(field.toJS(), 'recommendation')
         ));
+    }
+
+    handleDownload = (e) => {
+        e.preventDefault();
+
+        const information = this.props.Cv.get('information');
+        const education = this.props.Cv.get('education');
+        const workExperience = this.props.Cv.get('workExperience');
+        const aptitudes = this.props.Cv.get('aptitudes');
+        const recommendations = this.props.Cv.get('recommendations');
+
+        this.deleteAll();
+        this.writeAll(information, education, workExperience, aptitudes, recommendations);
+
     }
 
     render() {

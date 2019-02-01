@@ -90,7 +90,6 @@ class FormModal extends Component {
     }
 
     render() {
-        console.log('FormModal render ');
         return (
             <form>
                 {this.props.fields.map(field => (
