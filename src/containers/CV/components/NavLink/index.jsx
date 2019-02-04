@@ -21,7 +21,6 @@ class NavigationLink extends Component {
       if (this.props.flag !== nextProps.flag) {
         this.setState({ isHovered: nextProps.flag });
       }
-      this.forceUpdate();
     }
 
     handleClick = (e, flag) => {
@@ -32,7 +31,6 @@ class NavigationLink extends Component {
     }
 
     render() {
-      // const style = this.props.flag ? { hover: '#f1f1f1' } : { hover: '#818181' }
       const myClass = this.state.isHovered ? 'sidebar-item' : 'sidebar-no-hover';
       return (
         <NavLink
