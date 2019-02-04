@@ -16,7 +16,7 @@ class EducationComponent extends Component {
       education: PropTypes.instanceOf(List).isRequired,
       addEducation: PropTypes.func.isRequired,
       updateField: PropTypes.func.isRequired,
-      isCompleted: PropTypes.bool.isRequired
+      isCompleted: PropTypes.func.isRequired
     }
 
     constructor() {

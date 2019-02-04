@@ -14,7 +14,7 @@ class WorkExperienceComponent extends Component {
     static propTypes = {
       workExperience: PropTypes.instanceOf(List),
       addWork: PropTypes.func.isRequired,
-      isCompleted: PropTypes.bool.isRequired,
+      isCompleted: PropTypes.func.isRequired,
       updateField: PropTypes.func.isRequired
     }
 

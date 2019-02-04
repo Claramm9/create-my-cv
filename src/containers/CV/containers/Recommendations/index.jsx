@@ -16,7 +16,7 @@ class RecommendationsComponent extends Component {
     static propTypes = {
       recommendations: PropTypes.instanceOf(List),
       addRecommendation: PropTypes.func.isRequired,
-      isCompleted: PropTypes.bool.isRequired,
+      isCompleted: PropTypes.func.isRequired,
       updateField: PropTypes.func.isRequired
     }
 

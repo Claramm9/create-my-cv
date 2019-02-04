@@ -14,7 +14,7 @@ class InformationComponent extends Component {
     static propTypes = {
       info: PropTypes.instanceOf(Map),
       addInfo: PropTypes.func.isRequired,
-      isCompleted: PropTypes.bool.isRequired
+      isCompleted: PropTypes.func.isRequired
     }
 
     constructor(props) {

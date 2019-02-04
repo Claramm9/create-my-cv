@@ -13,7 +13,7 @@ class AptitudesComponent extends Component {
     static propTypes = {
       aptitudes: PropTypes.instanceOf(List).isRequired,
       addAptitud: PropTypes.func.isRequired,
-      isCompleted: PropTypes.bool.isRequired,
+      isCompleted: PropTypes.func.isRequired,
       deleteAptitud: PropTypes.func.isRequired,
       onDelete: PropTypes.func.isRequired
     }
