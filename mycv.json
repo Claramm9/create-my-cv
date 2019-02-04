@@ -1,7 +1,49 @@
 {
-  "information": [],
-  "education": [],
-  "workExperience": [],
-  "aptitudes": [],
+  "information": [
+    {
+      "id": 1,
+      "name": "ertyuio",
+      "lastName": "ertyuio",
+      "address": "fghjklñ",
+      "number": "345678909876",
+      "email": "clara@gmail.com",
+      "birthday": "11-11-1992",
+      "nationality": "española"
+    }
+  ],
+  "education": [
+    {
+      "center": "ertyui",
+      "studies": "ertyuio",
+      "startDate": "11-11-2000",
+      "endDate": "11-11-2002",
+      "description": "sda",
+      "id": "0ea44def-ebd3-4e07-b2d5-266e674904ea"
+    }
+  ],
+  "workExperience": [
+    {
+      "company": "tyuio",
+      "position": "rtyuio",
+      "startDate": "11-11-2000",
+      "endDate": "11-11-2002",
+      "description": "sw",
+      "id": "5ad688c4-bb95-412e-b2dc-d5608768afa3"
+    }
+  ],
+  "aptitudes": [
+    {
+      "id": 1,
+      "aptitud": "ewe"
+    },
+    {
+      "id": 2,
+      "aptitud": "rtr"
+    },
+    {
+      "id": 3,
+      "aptitud": "iou"
+    }
+  ],
   "recommendation": []
 }

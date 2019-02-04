@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import cvReducer from '../containers/CV/reducers/index';
 
 const rootReducer = combineReducers({
-    Cv: cvReducer
+  Cv: cvReducer
 });
 
 export default rootReducer;

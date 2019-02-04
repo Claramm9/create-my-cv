@@ -16,6 +16,16 @@ ul{
     display: block;
   }
 
+  .sidebar-no-hover {
+   padding: 6px 30px 6px 0px;
+   text-decoration: none;
+   font-size: 20px;
+   float: left;
+   color: #818181;
+   display: block;
+ }
+
+
 .check {
    float: right;
 }
@@ -26,4 +36,4 @@ ul{
 
 .sidebar-item:active {
    color: #f1f1f1;
-}
+} 

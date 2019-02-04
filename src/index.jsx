@@ -8,10 +8,10 @@ import App from './containers/App/index.jsx';
 import * as serviceWorker from './serviceWorker';
 
 render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={ store }>
+    <App />
+  </Provider>,
+  document.getElementById('root')
 );
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

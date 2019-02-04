@@ -1,62 +1,59 @@
 import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import './styles.css';
 import Check from '../Check/index.jsx';
+import NavigationLink from '../NavLink/index.jsx'
 
 const Sidebar = ({ flags }) => {
+
     return (
         <div className="sidenav">
             <ul>
                 <li>
-                    <NavLink
-                        to="/CV/personal-information"
-                        className="sidebar-item"
-                        activeStyle={{ color: '#f1f1f1' }}
+                    <NavigationLink
+                        path="/CV/personal-information"
+                        title="Personal Information"
+                        flag={true}
                     >
-                        Personal Information
-                    </NavLink>
-                    {flags.infoCompleted && <Check className="check"/>}
+                    </NavigationLink>
+                    {flags.infoCompleted && <Check className="check" />}
                 </li>
                 <li>
-                    {flags.infoCompleted && <NavLink
-                        to="/CV/education"
-                        className="sidebar-item"
-                        activeStyle={{ color: '#f1f1f1' }}
+                    <NavigationLink
+                        path="/CV/education"
+                        title="Education"
+                        flag={flags.infoCompleted}
                     >
-                        Education
-                    </NavLink>}
-                    {flags.eduCompleted && <Check className="check"/>}
+                    </NavigationLink>
+                    {flags.eduCompleted && <Check className="check" />}
                 </li>
                 <li>
-                    {flags.eduCompleted && <NavLink
-                        to="/CV/work-experience"
-                        className="sidebar-item"
-                        activeStyle={{ color: '#f1f1f1' }}
+                    <NavigationLink
+                        path="/CV/work-experience"
+                        title="Work Experience"
+                        flag={flags.eduCompleted}
                     >
-                        Work Experience
-                    </NavLink>}
-                    {flags.workCompleted && <Check className="check"/>}
+                    </NavigationLink>
+                    {flags.workCompleted && <Check className="check" />}
                 </li>
                 <li>
-                    {flags.workCompleted && <NavLink
-                        to="/CV/aptitudes"
-                        className="sidebar-item"
-                        activeStyle={{ color: '#f1f1f1' }}
+                    <NavigationLink
+                        path="/CV/aptitudes"
+                        title="Aptitudes"
+                        flag={flags.workCompleted}
                     >
-                        Aptitudes
-                    </NavLink>}
-                    {flags.aptitudCompleted && <Check className="check"/>}
+                    </NavigationLink>
+                    {flags.aptitudCompleted && <Check className="check" />}
                 </li>
                 <li>
-                    {flags.aptitudCompleted && <NavLink
-                        to="/CV/recommendation"
-                        className="sidebar-item"
-                        activeStyle={{ color: '#f1f1f1' }}
+                    <NavigationLink
+                        path="/CV/recommendation"
+                        title="Recommendation"
+                        flag={true}
                     >
-                        Recommendation
-                     </NavLink>}
-                     {flags.recomCompleted && <Check className="check"/>}
+                    </NavigationLink>
+                    {flags.recomCompleted && <Check className="check" />}
                 </li>
             </ul>
         </div>
