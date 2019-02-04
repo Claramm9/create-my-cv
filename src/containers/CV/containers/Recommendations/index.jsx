@@ -13,94 +13,94 @@ import { addRecommendation, updateField } from '../../actions';
 
 class RecommendationsComponent extends Component {
 
-    static propTypes = {
-      recommendations: PropTypes.instanceOf(List),
-      addRecommendation: PropTypes.func.isRequired,
-      isCompleted: PropTypes.func.isRequired,
-      updateField: PropTypes.func.isRequired
-    }
+  static propTypes = {
+    recommendations: PropTypes.instanceOf(List),
+    addRecommendation: PropTypes.func.isRequired,
+    isCompleted: PropTypes.func.isRequired,
+    updateField: PropTypes.func.isRequired
+  }
 
-    constructor() {
-      super();
+  constructor() {
+    super();
 
-      this.state = {
-        isVisible: false,
-        isEditing: false
-      };
-    }
+    this.state = {
+      isVisible: false,
+      isEditing: false
+    };
+  }
 
-    handleAdd = () => {
-      this.changeVisibility(true);
-      this.changeEdition(false);
-    }
+  handleAdd = () => {
+    this.changeVisibility(true);
+    this.changeEdition(false);
+  }
 
-    handleEditing = () => {
-      this.changeVisibility(true);
-      this.changeEdition(true);
-    }
+  handleEditing = () => {
+    this.changeVisibility(true);
+    this.changeEdition(true);
+  }
 
-    changeVisibility = (value) => {
-      if (this.state.isVisible !== value) {
-        this.setState({ isVisible: value });
-      }
+  changeVisibility = (value) => {
+    if (this.state.isVisible !== value) {
+      this.setState({ isVisible: value });
     }
+  }
 
-    changeEdition = (value) => {
-      if (this.state.isEditing !== value) {
-        this.setState({ isEditing: value });
-      }
+  changeEdition = (value) => {
+    if (this.state.isEditing !== value) {
+      this.setState({ isEditing: value });
     }
+  }
 
-    confirm = (data) => {
-      this.props.addRecommendation(data);
-      this.changeVisibility(false);
-      this.props.isCompleted('recomCompleted', true);
-    }
+  confirm = (data) => {
+    this.props.addRecommendation(data);
+    this.changeVisibility(false);
+    this.props.isCompleted('recomCompleted', true);
+  }
 
-    update = (data) => {
-      const title = 'recommendation';
-      const info = this.props.recommendations.map(field => (field.get('id') === data.get('id')
-        ? field.set('id', data.get('id')).set('name', data.get('name')).set('recommendation', data.get('recommendation'))
-        : field));
-      this.props.updateField(info, title);
-      this.changeVisibility(false);
-    }
+  update = (data) => {
+    const title = 'recommendation';
+    const info = this.props.recommendations.map(field => (field.get('id') === data.get('id')
+      ? field.set('id', data.get('id')).set('name', data.get('name')).set('recommendation', data.get('recommendation'))
+      : field));
+    this.props.updateField(info, title);
+    this.changeVisibility(false);
+  }
 
-    render() {
-      const header = 'Create recommendations';
-      const isSimpleForm = false;
-      return (
-            <>
-                <h1>Recommendation</h1>
-                <div><button className="add" onClick={ this.handleAdd }>+</button></div>
-                {this.state.isEditing ? null
-                  : <Modal 
-                    onChangeVisibility={ this.changeVisibility } 
-                    isVisible={ this.state.isVisible } 
-                    header={ header }
-                  >
-                    <FormModal 
-                      onConfirm={ this.confirm } 
-                      fields={ fields } 
-                      isEditing={ this.state.isEditing } 
-                    />
-                  </Modal>
-                }
-                {this.props.recommendations.map(data => (
-                  <ListItem
-                    key={ data.get('id') }
-                    isSimpleForm={ isSimpleForm }
-                    header={ header }
-                    fields={ fields }
-                    data={ data }
-                    isEditing={ this.state.isEditing }
-                    onConfirm={ this.update }
-                    onEditing={ this.handleEditing }
-                  ></ListItem>
-                ))}
-            </>
-      );
-    }
+  render() {
+    const header = 'Create recommendations';
+    const isSimpleForm = false;
+    return (
+        <>
+          <h1>Recommendation</h1>
+          <div><button className="add" onClick={ this.handleAdd }>+</button></div>
+          {this.state.isEditing ? null
+            : <Modal 
+              onChangeVisibility={ this.changeVisibility } 
+              isVisible={ this.state.isVisible } 
+              header={ header }
+            >
+              <FormModal 
+                onConfirm={ this.confirm } 
+                fields={ fields } 
+                isEditing={ this.state.isEditing } 
+              />
+            </Modal>
+          }
+          {this.props.recommendations.map(data => (
+            <ListItem
+              key={ data.get('id') }
+              isSimpleForm={ isSimpleForm }
+              header={ header }
+              fields={ fields }
+              data={ data }
+              isEditing={ this.state.isEditing }
+              onConfirm={ this.update }
+              onEditing={ this.handleEditing }
+            ></ListItem>
+          ))}
+      </>
+    );
+  }
 }
 
 function mapDispatchToProps(dispatch) {

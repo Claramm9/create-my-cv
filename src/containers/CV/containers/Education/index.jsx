@@ -12,98 +12,98 @@ import { addEducation, updateField } from '../../actions/index';
 
 class EducationComponent extends Component {
 
-    static propTypes = {
-      education: PropTypes.instanceOf(List).isRequired,
-      addEducation: PropTypes.func.isRequired,
-      updateField: PropTypes.func.isRequired,
-      isCompleted: PropTypes.func.isRequired
+  static propTypes = {
+    education: PropTypes.instanceOf(List).isRequired,
+    addEducation: PropTypes.func.isRequired,
+    updateField: PropTypes.func.isRequired,
+    isCompleted: PropTypes.func.isRequired
+  }
+
+  constructor() {
+    super();
+
+    this.state = {
+      isVisible: false,
+      isEditing: false
+    };
+  }
+
+  handleAdd = () => {
+    this.changeVisibility(true);
+    this.changeEdition(false);
+  }
+
+  handleEditing = () => {
+    this.changeVisibility(true);
+    this.changeEdition(true);
+  }
+
+  changeVisibility = (value) => {
+    if (this.state.isVisible !== value) {
+      this.setState({ isVisible: value });
     }
+  }
 
-    constructor() {
-      super();
-
-      this.state = {
-        isVisible: false,
-        isEditing: false
-      };
+  changeEdition = (value) => {
+    if (this.state.isEditing !== value) {
+      this.setState({ isEditing: value });
     }
+  }
 
-    handleAdd = () => {
-      this.changeVisibility(true);
-      this.changeEdition(false);
-    }
+  confirm = (data) => {
+    this.props.addEducation(data);
+    this.changeVisibility(false);
+    this.props.isCompleted('eduCompleted', true);
+  }
 
-    handleEditing = () => {
-      this.changeVisibility(true);
-      this.changeEdition(true);
-    }
+  update = (data) => {
+    const title = 'education';
+    const info = this.props.education.map(field => (field.get('id') === data.get('id')
+      ? field.set('id', data.get('id')).set('center', data.get('center')).set('studies', data.get('studies')).set('startDate', data.get('startDate'))
+        .set('endDate', data.get('endDate'))
+        .set('description', data.get('description'))
+      : field));
+    this.props.updateField(info, title);
+    this.changeVisibility(false);
+  }
 
-    changeVisibility = (value) => {
-      if (this.state.isVisible !== value) {
-        this.setState({ isVisible: value });
-      }
-    }
-
-    changeEdition = (value) => {
-      if (this.state.isEditing !== value) {
-        this.setState({ isEditing: value });
-      }
-    }
-
-    confirm = (data) => {
-      this.props.addEducation(data);
-      this.changeVisibility(false);
-      this.props.isCompleted('eduCompleted', true);
-    }
-
-    update = (data) => {
-      const title = 'education';
-      const info = this.props.education.map(field => (field.get('id') === data.get('id')
-        ? field.set('id', data.get('id')).set('center', data.get('center')).set('studies', data.get('studies')).set('startDate', data.get('startDate'))
-          .set('endDate', data.get('endDate'))
-          .set('description', data.get('description'))
-        : field));
-      this.props.updateField(info, title);
-      this.changeVisibility(false);
-    }
-
-    render() {
-      const header = 'Create education';
-      const isSimpleForm = false;
-      const modalAdd = this.state.isEditing
-        ? null
-        : (<Modal
-          onChangeVisibility={ this.changeVisibility }
-          isVisible={ this.state.isVisible }
-          header={ header }
-        >
-          <FormModal
-            onConfirm={ this.confirm }
-            fields={ fields }
-            isEditing={ this.state.isEditing } />
-        </Modal>);
-
-      const listItems = this.props.education.map(data => (
-        <ListItem
-          key={ data.get('id') }
-          isSimpleForm={ isSimpleForm }
-          header={ header }
+  render() {
+    const header = 'Create education';
+    const isSimpleForm = false;
+    const modalAdd = this.state.isEditing
+      ? null
+      : (<Modal
+        onChangeVisibility={ this.changeVisibility }
+        isVisible={ this.state.isVisible }
+        header={ header }
+      >
+        <FormModal
+          onConfirm={ this.confirm }
           fields={ fields }
-          data={ data }
-          isEditing={ this.state.isEditing }
-          onConfirm={ this.update }
-          onEditing={ this.handleEditing }
-        ></ListItem>
-      ));
-      return (
-            <>
-                <h1>Education</h1>
-                <div><button className="add" onClick={ this.handleAdd }>+</button></div>
-                {modalAdd}
-                {listItems}
-            </>
-      );
-    }
+          isEditing={ this.state.isEditing } />
+      </Modal>);
+
+    const listItems = this.props.education.map(data => (
+      <ListItem
+        key={ data.get('id') }
+        isSimpleForm={ isSimpleForm }
+        header={ header }
+        fields={ fields }
+        data={ data }
+        isEditing={ this.state.isEditing }
+        onConfirm={ this.update }
+        onEditing={ this.handleEditing }
+      ></ListItem>
+    ));
+    return (
+      <>
+        <h1>Education</h1>
+        <div><button className="add" onClick={ this.handleAdd }>+</button></div>
+        {modalAdd}
+        {listItems}
+      </>
+    );
+  }
 }
 
 function mapDispatchToProps(dispatch) {

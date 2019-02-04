@@ -6,134 +6,134 @@ import './styles.css';
 import { isEmpty, isValidDate } from './validator';
 
 class FormModal extends Component {
-    static propTypes = {
-      fields: PropTypes.array.isRequired,
-      info: PropTypes.instanceOf(Map),
-      isEditing: PropTypes.bool.isRequired,
-      onConfirm: PropTypes.func.isRequired
-    }
+  static propTypes = {
+    fields: PropTypes.array.isRequired,
+    info: PropTypes.instanceOf(Map),
+    isEditing: PropTypes.bool.isRequired,
+    onConfirm: PropTypes.func.isRequired
+  }
 
-    constructor(props) {
-      super(props);
+  constructor(props) {
+    super(props);
 
-      this.state = {
-        fields: props.info ? props.info.toObject() : {},
-        errors: {}
-      };
-    }
+    this.state = {
+      fields: props.info ? props.info.toObject() : {},
+      errors: {}
+    };
+  }
 
-    validateForm = (data) => {
-      const fields = this.props.fields;
-      const errors = {};
+  validateForm = (data) => {
+    const fields = this.props.fields;
+    const errors = {};
 
-      let formIsValid = true;
+    let formIsValid = true;
 
-      fields.map(field => {
-        if (field.name !== 'description') {
-          if (isEmpty(data[field.name])) {
-            errors[field.name] = '*This field can not be empty.';
-            formIsValid = false;
-          }
+    fields.map(field => {
+      if (field.name !== 'description') {
+        if (isEmpty(data[field.name])) {
+          errors[field.name] = '*This field can not be empty.';
+          formIsValid = false;
         }
-        if (field.name === 'startDate' || field.name === 'endDate') {
-          if (!isValidDate(data[field.name])) {
-            errors[field.name] = '*Please enter a valid format.';
-            formIsValid = false;
-          }
+      }
+      if (field.name === 'startDate' || field.name === 'endDate') {
+        if (!isValidDate(data[field.name])) {
+          errors[field.name] = '*Please enter a valid format.';
+          formIsValid = false;
         }
-      });
+      }
+    });
 
+    this.setState({
+      errors
+    });
+    return formIsValid;
+  }
+
+  handleChange = (e) => {
+    const fields = this.state.fields;
+    fields[e.target.name] = e.target.value;
+    this.setState({
+      fields
+    });
+  }
+
+  handleClick = (e) => {
+    e.preventDefault();
+
+    let fields = {};
+
+    if (!this.props.isEditing) {
+      const uuid = require('uuid/v4');
+      fields = this.state.fields;
+      fields.id = uuid();
       this.setState({
-        errors
+        fields
       });
-      return formIsValid;
-    }
-
-    handleChange = (e) => {
-      const fields = this.state.fields;
-      fields[e.target.name] = e.target.value;
+    } else {
+      fields[name] = this.props.fields.map(field => (
+        typeof (this.state.fields[field.name]) === 'undefined'
+          ? this.props.info.get(field.name)
+          : this.state.fields[field.name]
+      ));
+      fields.id = this.props.info.get('id');
       this.setState({
         fields
       });
     }
-
-    handleClick = (e) => {
-      e.preventDefault();
-
-      let fields = {};
-
-      if (!this.props.isEditing) {
-        const uuid = require('uuid/v4');
-        fields = this.state.fields;
-        fields.id = uuid();
-        this.setState({
-          fields
-        });
-      } else {
-        fields[name] = this.props.fields.map(field => (
-          typeof (this.state.fields[field.name]) === 'undefined'
-            ? this.props.info.get(field.name)
-            : this.state.fields[field.name]
-        ));
-        fields.id = this.props.info.get('id');
-        this.setState({
-          fields
-        });
-      }
-      if (this.validateForm(fields)) {
-        const data = Map(fields);
+    if (this.validateForm(fields)) {
+      const data = Map(fields);
             
-        this.setState({
-          fields: {},
-          errors: {}
-        });
-        this.props.onConfirm(data);
-      }
+      this.setState({
+        fields: {},
+        errors: {}
+      });
+      this.props.onConfirm(data);
     }
+  }
 
-    render() {
-      return (
-        <form>
-          {this.props.fields.map(field => (
-            <div key={ field.id }>
-              <label>
-                {field.label}
-              </label>
+  render() {
+    return (
+      <form>
+        {this.props.fields.map(field => (
+          <div key={ field.id }>
+            <label>
+              {field.label}
+            </label>
 
-              {field.component === 'input'
-                ? <div className="personal-field">
-                  <input
-                    className="modal-input"
-                    type={ field.type }
-                    name={ field.name }
-                    placeholder={ field.placeholder }
-                    onChange={ this.handleChange }
-                    value={ this.state.fields[field.name] }
-                  >
-                  </input>
-                  <span className="validation">{this.state.errors[field.name]}</span>
-                </div>
-                : <div className="personal-field">
-                  <textarea
-                    rows="5"
-                    id="textarea"
-                    type={ field.type }
-                    name={ field.name }
-                    placeholder={ field.placeholder }
-                    onChange={ this.handleChange }
-                    value={ this.state.fields[field.name] }
-                  >
-                  </textarea>
-                  <span className="validation">{this.state.errors[field.name]}</span>
-                </div>
-              }
-            </div>
-          ))}
-          <div><input id="save" type="submit" value="Save"
-            onClick={ this.handleClick } /></div>
-        </form>
-      );
-    }
+            {field.component === 'input'
+              ? <div className="personal-field">
+                <input
+                  className="modal-input"
+                  type={ field.type }
+                  name={ field.name }
+                  placeholder={ field.placeholder }
+                  onChange={ this.handleChange }
+                  value={ this.state.fields[field.name] }
+                >
+                </input>
+                <span className="validation">{this.state.errors[field.name]}</span>
+              </div>
+              : <div className="personal-field">
+                <textarea
+                  rows="5"
+                  id="textarea"
+                  type={ field.type }
+                  name={ field.name }
+                  placeholder={ field.placeholder }
+                  onChange={ this.handleChange }
+                  value={ this.state.fields[field.name] }
+                >
+                </textarea>
+                <span className="validation">{this.state.errors[field.name]}</span>
+              </div>
+            }
+          </div>
+        ))}
+        <div><input id="save" type="submit" value="Save"
+          onClick={ this.handleClick } /></div>
+      </form>
+    );
+  }
 }
 
 export default FormModal;
