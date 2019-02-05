@@ -62,11 +62,9 @@ class InformationComponent extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addInfo: info => dispatch(addInfo(info))
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  addInfo: info => dispatch(addInfo(info))
+});
 
 const mapStateToProps = ({ Cv }) => ({
   info: Cv.get('information')

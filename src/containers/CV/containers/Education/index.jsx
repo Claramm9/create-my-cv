@@ -11,7 +11,6 @@ import FormModal from '../../components/FormModal/index.jsx';
 import { addEducation, updateField } from '../../actions/index';
 
 class EducationComponent extends Component {
-
   static propTypes = {
     education: PropTypes.instanceOf(List).isRequired,
     addEducation: PropTypes.func.isRequired,
@@ -19,13 +18,9 @@ class EducationComponent extends Component {
     isCompleted: PropTypes.func.isRequired
   }
 
-  constructor() {
-    super();
-
-    this.state = {
-      isVisible: false,
-      isEditing: false
-    };
+  state = {
+    isVisible: false,
+    isEditing: false
   }
 
   handleAdd = () => {
@@ -72,8 +67,7 @@ class EducationComponent extends Component {
     const isSimpleForm = false;
     const modal = this.state.isEditing && (
       <Modal onChangeVisibility={ this.changeVisibility }
-        isVisible={ this.state.isVisible }
-        header={ header }>
+        isVisible={ this.state.isVisible } header={ header }>
         <FormModal onConfirm={ this.confirm } fields={ fields } isEditing={ this.state.isEditing }/>
       </Modal>);
     const listItems = this.props.education.map(data => (
@@ -93,14 +87,14 @@ class EducationComponent extends Component {
     );
   }
 }
-function mapDispatchToProps(dispatch) {
-  return {
-    addEducation: info => dispatch(addEducation(info)),
-    updateField: (info, title) => dispatch(updateField(info, title))
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  addEducation: info => dispatch(addEducation(info)),
+  updateField: (info, title) => dispatch(updateField(info, title))
+});
 const mapStateToProps = ({ Cv }) => ({
   education: Cv.get('education')
 });
+
 const Education = connect(mapStateToProps, mapDispatchToProps)(EducationComponent);
+
 export default Education;

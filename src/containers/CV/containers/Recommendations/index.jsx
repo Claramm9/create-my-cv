@@ -20,13 +20,9 @@ class RecommendationsComponent extends Component {
     updateField: PropTypes.func.isRequired
   }
 
-  constructor() {
-    super();
-
-    this.state = {
-      isVisible: false,
-      isEditing: false
-    };
+  state = {
+    isVisible: false,
+    isEditing: false
   }
 
   handleAdd = () => {
@@ -92,12 +88,10 @@ class RecommendationsComponent extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addRecommendation: info => dispatch(addRecommendation(info)),
-    updateField: (info, title) => dispatch(updateField(info, title))
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  addRecommendation: info => dispatch(addRecommendation(info)),
+  updateField: (info, title) => dispatch(updateField(info, title))
+});
 const mapStateToProps = ({ Cv }) => ({
   recommendations: Cv.get('recommendations'),
   Cv

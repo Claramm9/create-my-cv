@@ -18,13 +18,9 @@ class WorkExperienceComponent extends Component {
     updateField: PropTypes.func.isRequired
   }
 
-  constructor() {
-    super();
-
-    this.state = {
-      isVisible: false,
-      isEditing: false
-    };
+  state = {
+    isVisible: false,
+    isEditing: false
   }
 
   handleAdd = () => {
@@ -92,12 +88,10 @@ class WorkExperienceComponent extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addWork: info => dispatch(addWork(info)),
-    updateField: (info, title) => dispatch(updateField(info, title))
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  addWork: info => dispatch(addWork(info)),
+  updateField: (info, title) => dispatch(updateField(info, title))
+});
 const mapStateToProps = ({ Cv }) => ({
   workExperience: Cv.get('workExperience')
 });

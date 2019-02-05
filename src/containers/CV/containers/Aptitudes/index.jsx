@@ -18,13 +18,9 @@ class AptitudesComponent extends Component {
     onDelete: PropTypes.func.isRequired
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      aptitud: '',
-      error: ''
-    };
+  state = {
+    aptitud: '',
+    error: ''
   }
 
   validateForm = () => {
@@ -35,9 +31,7 @@ class AptitudesComponent extends Component {
       formIsValid = false;
       error = '*This field can not be empty.';
     }
-    this.setState({
-      error
-    });
+    this.setState({ error });
     return formIsValid;
   }
 
@@ -57,12 +51,7 @@ class AptitudesComponent extends Component {
         error: ''
       });
       this.props.addAptitud(data);
-
-      if (this.props.aptitudes.count() > 1) {
-        this.props.isCompleted('aptitudCompleted', true);
-      } else {
-        this.props.isCompleted('aptitudCompleted', false);
-      }
+      this.props.isCompleted('aptitudCompleted', this.props.aptitudes.count() > 1);
     }
   }
 
@@ -102,12 +91,10 @@ class AptitudesComponent extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addAptitud: info => dispatch(addAptitud(info)),
-    deleteAptitud: aptitudes => dispatch(deleteAptitud(aptitudes))
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  addAptitud: info => dispatch(addAptitud(info)),
+  deleteAptitud: aptitudes => dispatch(deleteAptitud(aptitudes))
+});
 
 const mapStateToProps = ({ Cv }) => ({
   aptitudes: Cv.get('aptitudes')

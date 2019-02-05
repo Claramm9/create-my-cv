@@ -1,7 +1,7 @@
-import { Record, Map, List } from 'immutable';
+import { Record, List } from 'immutable';
 
 export const CVModel = Record({
-  information: Map(),
+  information: null,
   education: List(),
   workExperience: List(),
   aptitudes: List(),
