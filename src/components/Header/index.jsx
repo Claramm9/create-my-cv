@@ -1,10 +1,11 @@
 import './styles.css';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Header = ({ downloadButton, onDownload }) => (
   <div className="header">
     <nav>
-                CREATE YOUR CV
+      CREATE YOUR CV
     </nav>
     {downloadButton 
       && <div className="downloadDiv">
@@ -12,13 +13,16 @@ const Header = ({ downloadButton, onDownload }) => (
           className="download"
           onClick={ onDownload }
         >
-                        Download
+          Download
         </button>
       </div>
     }
   </div>
-
 );
 
+Header.propTypes = {
+  downloadButton: PropTypes.bool.isRequired,
+  onDownload: PropTypes.func.isRequired
+};
 
 export default Header;

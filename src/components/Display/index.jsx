@@ -1,8 +1,13 @@
 import React from 'react';
+import { Map } from 'immutable';
+import PropTypes from 'prop-types';
 
 import './styles.css';
 
-const Display = ({ fields, data, isSimpleForm, onDelete }) => (
+const Display = ({
+  fields, data, isSimpleForm, onDelete 
+}) => (
+
   <>
     {!(isSimpleForm)
       ? <div className="display">
@@ -20,5 +25,11 @@ const Display = ({ fields, data, isSimpleForm, onDelete }) => (
   </>
 );
 
+Display.propTypes = {
+  fields: PropTypes.array.isRequired,
+  data: PropTypes.instanceOf(Map),
+  isSimpleForm: PropTypes.bool.isRequired,
+  onDelete: PropTypes.func,
+};
 
 export default Display;

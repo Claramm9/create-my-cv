@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Map } from 'immutable';
 
 import '../../styles.css';
 import Modal from '../Modal/index.jsx';
@@ -51,7 +52,7 @@ class ListItem extends Component {
   }
 
   render() {
-    const props = this.props;
+    const { props } = this;
     return (
       <div className="show-info">
         <Display 

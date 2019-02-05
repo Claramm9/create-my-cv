@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { Record } from 'immutable';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';

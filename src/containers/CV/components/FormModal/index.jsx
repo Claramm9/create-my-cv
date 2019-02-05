@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Map } from 'immutable';
@@ -5,7 +6,10 @@ import { Map } from 'immutable';
 import './styles.css';
 import { isEmpty, isValidDate } from './validator';
 
+const uuid = require('uuid/v4');
+
 class FormModal extends Component {
+  
   static propTypes = {
     fields: PropTypes.array.isRequired,
     info: PropTypes.instanceOf(Map),
@@ -23,7 +27,7 @@ class FormModal extends Component {
   }
 
   validateForm = (data) => {
-    const fields = this.props.fields;
+    const { fields } = this.props;
     const errors = {};
 
     let formIsValid = true;
@@ -50,7 +54,7 @@ class FormModal extends Component {
   }
 
   handleChange = (e) => {
-    const fields = this.state.fields;
+    const { fields } = this.state;
     fields[e.target.name] = e.target.value;
     this.setState({
       fields
@@ -60,26 +64,16 @@ class FormModal extends Component {
   handleClick = (e) => {
     e.preventDefault();
 
-    let fields = {};
+    const { fields } = this.state;
 
     if (!this.props.isEditing) {
-      const uuid = require('uuid/v4');
-      fields = this.state.fields;
+      
       fields.id = uuid();
       this.setState({
         fields
       });
-    } else {
-      fields[name] = this.props.fields.map(field => (
-        typeof (this.state.fields[field.name]) === 'undefined'
-          ? this.props.info.get(field.name)
-          : this.state.fields[field.name]
-      ));
-      fields.id = this.props.info.get('id');
-      this.setState({
-        fields
-      });
     }
+
     if (this.validateForm(fields)) {
       const data = Map(fields);
             

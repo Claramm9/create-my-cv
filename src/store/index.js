@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { createStore } from 'redux';
 import initialState from '../models';
 import rootReducer from '../reducers';

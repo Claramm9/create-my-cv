@@ -9,20 +9,6 @@ class NavigationLink extends Component {
     title: PropTypes.string.isRequired
   }
 
-  constructor(props) {
-    super(props);
-        
-    this.state = {
-      isHovered: props.flag
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.flag !== nextProps.flag) {
-      this.setState({ isHovered: nextProps.flag });
-    }
-  }
-
   handleClick = (e, flag) => {
     if (!flag) {
       e.preventDefault();
@@ -31,7 +17,7 @@ class NavigationLink extends Component {
   }
 
   render() {
-    const myClass = this.state.isHovered ? 'sidebar-item' : 'sidebar-no-hover';
+    const myClass = this.props.flag ? 'sidebar-item' : 'sidebar-no-hover';
     return (
       <NavLink
         onClick={ (e) => this.handleClick(e, this.props.flag) }

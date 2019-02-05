@@ -8,7 +8,8 @@ class Modal extends Component {
     isVisible: PropTypes.bool.isRequired,
     header: PropTypes.string.isRequired,
     onChangeVisibility: PropTypes.func.isRequired,
-    onConfirm: PropTypes.func
+    onConfirm: PropTypes.func,
+    children: PropTypes.object.isRequired
   }
 
   state = {

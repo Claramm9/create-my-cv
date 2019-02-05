@@ -68,7 +68,7 @@ class InformationComponent extends Component {
   }
 
   validateForm = () => {
-    const fields = this.state.fields;
+    const { fields } = this.state;
     const errors = {
       name: '',
       lastName: '',
@@ -156,7 +156,7 @@ class InformationComponent extends Component {
   }
 
   handleChange = (e) => {
-    const fields = this.state.fields;
+    const { fields } = this.state;
     fields[e.target.name] = e.target.value;
     this.setState({
       fields

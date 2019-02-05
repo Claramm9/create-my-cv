@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 import './styles.css';
@@ -57,5 +58,9 @@ const Sidebar = ({ flags }) => (
     </ul>
   </div>
 );
+
+Sidebar.propTypes = {
+  flags: PropTypes.object.isRequired
+};
 
 export default withRouter(Sidebar);

@@ -1,3 +1,6 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-case-declarations */
+/* eslint-disable consistent-return */
 import { initialStateCV } from '../models/index';
 import {
   ADD_INFO, ADD_EDUCATION, ADD_WORK, ADD_APTITUDE, 
@@ -49,9 +52,9 @@ const cvReducer = (state = initialStateCV, action) => {
     case UPDATE_FIELD:
       if (action.title === 'education') {
         return state.set('education', action.payload);
-      } else if (action.title === 'workExperience') {
+      } if (action.title === 'workExperience') {
         return state.set('workExperience', action.payload);
-      } else if (action.title === 'recommendation') {
+      } if (action.title === 'recommendation') {
         return state.set('recommendations', action.payload);
       }
       break;
