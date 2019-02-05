@@ -85,25 +85,16 @@ class AptitudesComponent extends Component {
       <div className="aptitudes">
         <h1>{header}</h1>
         <div className="input-row">
-          <input
-            className="input-aptitude"
-            type="text"
-            name="aptitud"
-            value={ this.state.aptitud }
-            onChange={ this.handleChange }
-          >
+          <input className="input-aptitude" type="text" name="aptitud"
+            value={ this.state.aptitud } onChange={ this.handleChange }>
           </input>
           <button id="add" onClick={ this.handleClick }>Add</button>
         </div>
         <span className="validation">{this.state.error}</span>
         <div className="display-aptitudes">
           {this.props.aptitudes.map(data => (
-            <Display
-              key={ data.get('id') }
-              onDelete={ this.delete }
-              isSimpleForm={ isSimpleForm }
-              data={ data } 
-            />
+            <Display key={ data.get('id') } onDelete={ this.delete } 
+              isSimpleForm={ isSimpleForm } data={ data }/>
           ))}
         </div>
       </div>
