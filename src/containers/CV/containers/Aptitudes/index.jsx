@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import { Map, List } from 'immutable';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Map, List } from 'immutable';
 
 import './styles.css';
 import '../../styles.css';
-import { addAptitud, deleteAptitud } from '../../actions/index';
-import Display from '../../../../components/Display/index.jsx';
 import { isEmpty } from '../../services/validation/validator';
+import Display from '../../../../components/Display/index.jsx';
+import { addAptitud, deleteAptitud } from '../../actions/index';
 
 class AptitudesComponent extends Component {
   static propTypes = {
