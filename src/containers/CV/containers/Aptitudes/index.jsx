@@ -7,7 +7,7 @@ import './styles.css';
 import '../../styles.css';
 import { addAptitud, deleteAptitud } from '../../actions/index';
 import Display from '../../../../components/Display/index.jsx';
-import { isEmpty } from '../../components/FormModal/validator';
+import { isEmpty } from '../../services/validation/validator';
 
 class AptitudesComponent extends Component {
   static propTypes = {
