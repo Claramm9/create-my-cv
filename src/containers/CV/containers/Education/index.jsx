@@ -70,7 +70,7 @@ class EducationComponent extends Component {
   render() {
     const header = 'Create education';
     const isSimpleForm = false;
-    const modalAdd = this.state.isEditing && (
+    const modal = this.state.isEditing && (
       <Modal onChangeVisibility={ this.changeVisibility }
         isVisible={ this.state.isVisible }
         header={ header }>
@@ -87,7 +87,7 @@ class EducationComponent extends Component {
       <>
         <h1>Education</h1>
         <div><button className="add" onClick={ this.handleAdd }>+</button></div>
-        {modalAdd}
+        {modal}
         {listItems}
       </>
     );

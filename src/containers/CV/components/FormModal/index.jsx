@@ -5,7 +5,7 @@ import { Map } from 'immutable';
 
 import './styles.css';
 import Form from '../Form/index.jsx';
-import { isEmpty, isValidDate } from './validator';
+import { isEmpty, isValidDate } from '../../services/validation/validator';
 
 const uuid = require('uuid/v4');
 

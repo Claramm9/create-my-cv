@@ -69,35 +69,24 @@ class RecommendationsComponent extends Component {
   render() {
     const header = 'Create recommendations';
     const isSimpleForm = false;
+    const modal = this.state.isEditing && (
+      <Modal onChangeVisibility={ this.changeVisibility } 
+        isVisible={ this.state.isVisible } header={ header }>
+        <FormModal onConfirm={ this.confirm } fields={ fields } isEditing={ this.state.isEditing }/>
+      </Modal>);
+    const listItems = this.props.recommendations.map(data => (
+      <ListItem
+        key={ data.get('id') } isSimpleForm={ isSimpleForm } header={ header }
+        fields={ fields } data={ data } isEditing={ this.state.isEditing }
+        onConfirm={ this.update } onEditing={ this.handleEditing }
+      ></ListItem>
+    ));
     return (
         <>
           <h1>Recommendation</h1>
           <div><button className="add" onClick={ this.handleAdd }>+</button></div>
-          {this.state.isEditing ? null
-            : <Modal 
-              onChangeVisibility={ this.changeVisibility } 
-              isVisible={ this.state.isVisible } 
-              header={ header }
-            >
-              <FormModal 
-                onConfirm={ this.confirm } 
-                fields={ fields } 
-                isEditing={ this.state.isEditing } 
-              />
-            </Modal>
-          }
-          {this.props.recommendations.map(data => (
-            <ListItem
-              key={ data.get('id') }
-              isSimpleForm={ isSimpleForm }
-              header={ header }
-              fields={ fields }
-              data={ data }
-              isEditing={ this.state.isEditing }
-              onConfirm={ this.update }
-              onEditing={ this.handleEditing }
-            ></ListItem>
-          ))}
+          { modal }
+          { listItems }
       </>
     );
   }
@@ -109,12 +98,10 @@ function mapDispatchToProps(dispatch) {
     updateField: (info, title) => dispatch(updateField(info, title))
   };
 }
-
 const mapStateToProps = ({ Cv }) => ({
   recommendations: Cv.get('recommendations'),
   Cv
 });
-
 const Recommendations = connect(mapStateToProps, mapDispatchToProps)(RecommendationsComponent);
 
 export default Recommendations;

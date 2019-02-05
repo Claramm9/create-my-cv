@@ -5,9 +5,7 @@ import React, { Component } from 'react';
 
 import './styles.css';
 import { addInfo } from '../../actions/index';
-import {
-  isEmpty, isEmailValid, isValidName, isValidDate, isValidNumber 
-} from '../../components/FormModal/validator';
+import { validateForm } from '../../services/validation/validateForm';
 import InformationForm from './components/InformationForm/index.jsx';
 
 class InformationComponent extends Component {
@@ -28,86 +26,6 @@ class InformationComponent extends Component {
     
   }
 
-  validateForm = () => {
-    const { fields } = this.state;
-    const errors = {};
-    let formIsValid = true;
-
-    if (isEmpty(fields.name)) {
-      formIsValid = false;
-      errors.name = '*Please enter your name.';
-    }
-
-    if (isEmpty(fields.lastName)) {
-      formIsValid = false;
-      errors.lastName = '*Please enter your last name.';
-    }
-
-    if (typeof fields.name !== 'undefined') {
-      if (!isValidName(fields.name)) {
-        formIsValid = false;
-        errors.name = '*Please enter alphabet characters only.';
-      }
-    }
-    if (typeof fields.lastName !== 'undefined') {
-      if (!isValidName(fields.lastName)) {
-        formIsValid = false;
-        errors.lastName = '*Please enter alphabet characters only.';
-      }
-    }
-
-    if (isEmpty(fields.email)) {
-      formIsValid = false;
-      errors.email = '*Please enter your email.';
-    }
-
-    if (typeof fields.email !== 'undefined') {
-      if (!isEmailValid(fields.email)) {
-        formIsValid = false;
-        errors.email = '*Please enter valid email.';
-      }
-    }
-
-    if (isEmpty(fields.number)) {
-      formIsValid = false;
-      errors.number = '*Please enter your mobile number.';
-    }
-
-    if (typeof fields.number !== 'undefined') {
-      if (!isValidNumber(fields.number)) {
-        formIsValid = false;
-        errors.number = '*Please enter valid mobile number.';
-      }
-    }
-
-    if (isEmpty(fields.address)) {
-      formIsValid = false;
-      errors.address = '*Please enter your address.';
-    }
-
-    if (isEmpty(fields.birthday)) {
-      formIsValid = false;
-      errors.birthday = '*Please enter your birthday.';
-    }
-
-    if (typeof fields.birthday !== 'undefined') {
-      if (!isValidDate(fields.birthday)) {
-        formIsValid = false;
-        errors.birthday = '*Please enter a valid format.';
-      }
-    }
-
-    if (isEmpty(fields.nationality)) {
-      formIsValid = false;
-      errors.nationality = '*Please enter your nationality.';
-    }
-
-    this.setState({
-      errors
-    });
-    return formIsValid;
-  }
-
   handleChange = (e) => {
     const { fields } = this.state;
     fields[e.target.name] = e.target.value;
@@ -118,11 +36,14 @@ class InformationComponent extends Component {
 
   handleClick = (e) => {
     e.preventDefault();
-    if (this.validateForm()) {
+    const data = validateForm(this.state.fields);
+    if (data.isFormValid) {
       const info = Map(this.state.fields);
       this.props.addInfo(info);
       this.props.isCompleted('infoCompleted', true);
       alert('Saved!');      
+    } else {
+      this.setState({ errors: data.errors });
     }
   }
 
