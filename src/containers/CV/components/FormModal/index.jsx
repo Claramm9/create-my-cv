@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import { Map } from 'immutable';
 
 import './styles.css';
+import Form from '../Form/index.jsx';
 import { isEmpty, isValidDate } from './validator';
 
 const uuid = require('uuid/v4');
 
 class FormModal extends Component {
-  
   static propTypes = {
     fields: PropTypes.array.isRequired,
     info: PropTypes.instanceOf(Map),
@@ -29,7 +29,6 @@ class FormModal extends Component {
   validateForm = (data) => {
     const { fields } = this.props;
     const errors = {};
-
     let formIsValid = true;
 
     fields.map(field => {
@@ -46,7 +45,6 @@ class FormModal extends Component {
         }
       }
     });
-
     this.setState({
       errors
     });
@@ -63,20 +61,16 @@ class FormModal extends Component {
 
   handleClick = (e) => {
     e.preventDefault();
-
     const { fields } = this.state;
 
     if (!this.props.isEditing) {
-      
       fields.id = uuid();
       this.setState({
         fields
       });
     }
-
     if (this.validateForm(fields)) {
-      const data = Map(fields);
-            
+      const data = Map(fields);   
       this.setState({
         fields: {},
         errors: {}
@@ -87,45 +81,13 @@ class FormModal extends Component {
 
   render() {
     return (
-      <form>
-        {this.props.fields.map(field => (
-          <div key={ field.id }>
-            <label>
-              {field.label}
-            </label>
-
-            {field.component === 'input'
-              ? <div className="personal-field">
-                <input
-                  className="modal-input"
-                  type={ field.type }
-                  name={ field.name }
-                  placeholder={ field.placeholder }
-                  onChange={ this.handleChange }
-                  value={ this.state.fields[field.name] }
-                >
-                </input>
-                <span className="validation">{this.state.errors[field.name]}</span>
-              </div>
-              : <div className="personal-field">
-                <textarea
-                  rows="5"
-                  id="textarea"
-                  type={ field.type }
-                  name={ field.name }
-                  placeholder={ field.placeholder }
-                  onChange={ this.handleChange }
-                  value={ this.state.fields[field.name] }
-                >
-                </textarea>
-                <span className="validation">{this.state.errors[field.name]}</span>
-              </div>
-            }
-          </div>
-        ))}
-        <div><input id="save" type="submit" value="Save"
-          onClick={ this.handleClick } /></div>
-      </form>
+      <Form 
+        fields={ this.props.fields } 
+        state={ this.state } 
+        onChange={ this.handleChange } 
+        onClick={ this.handleClick } 
+      >
+      </Form>
     );
   }
 }

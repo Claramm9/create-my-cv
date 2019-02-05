@@ -70,29 +70,17 @@ class EducationComponent extends Component {
   render() {
     const header = 'Create education';
     const isSimpleForm = false;
-    const modalAdd = this.state.isEditing
-      ? null
-      : (<Modal
-        onChangeVisibility={ this.changeVisibility }
+    const modalAdd = this.state.isEditing && (
+      <Modal onChangeVisibility={ this.changeVisibility }
         isVisible={ this.state.isVisible }
-        header={ header }
-      >
-        <FormModal
-          onConfirm={ this.confirm }
-          fields={ fields }
-          isEditing={ this.state.isEditing } />
+        header={ header }>
+        <FormModal onConfirm={ this.confirm } fields={ fields } isEditing={ this.state.isEditing }/>
       </Modal>);
-
     const listItems = this.props.education.map(data => (
       <ListItem
-        key={ data.get('id') }
-        isSimpleForm={ isSimpleForm }
-        header={ header }
-        fields={ fields }
-        data={ data }
-        isEditing={ this.state.isEditing }
-        onConfirm={ this.update }
-        onEditing={ this.handleEditing }
+        key={ data.get('id') } isSimpleForm={ isSimpleForm } header={ header }
+        fields={ fields } data={ data } isEditing={ this.state.isEditing }
+        onConfirm={ this.update } onEditing={ this.handleEditing }
       ></ListItem>
     ));
     return (
@@ -105,18 +93,14 @@ class EducationComponent extends Component {
     );
   }
 }
-
 function mapDispatchToProps(dispatch) {
   return {
     addEducation: info => dispatch(addEducation(info)),
     updateField: (info, title) => dispatch(updateField(info, title))
   };
 }
-
 const mapStateToProps = ({ Cv }) => ({
   education: Cv.get('education')
 });
-
 const Education = connect(mapStateToProps, mapDispatchToProps)(EducationComponent);
-
 export default Education;

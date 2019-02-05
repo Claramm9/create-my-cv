@@ -8,6 +8,7 @@ import { addInfo } from '../../actions/index';
 import {
   isEmpty, isEmailValid, isValidName, isValidDate, isValidNumber 
 } from '../../components/FormModal/validator';
+import InformationForm from './components/InformationForm/index.jsx';
 
 class InformationComponent extends Component {
 
@@ -20,64 +21,16 @@ class InformationComponent extends Component {
   constructor(props) {
     super(props);
 
-    if (this.props.info === 'undefined') {
-      this.state = {
-        fields: {
-          id: 1,
-          name: '',
-          lastName: '',
-          address: '',
-          number: '',
-          email: '',
-          birthday: '',
-          nationality: ''
-        },
-        errors: {
-          name: '',
-          lastName: '',
-          address: '',
-          number: '',
-          email: '',
-          birthday: '',
-          nationality: ''
-        }
-      };
-    } else {
-      this.state = {
-        fields: {
-          id: this.props.info.get('id'),
-          name: this.props.info.get('name'),
-          lastName: this.props.info.get('lastName'),
-          address: this.props.info.get('address'),
-          number: this.props.info.get('number'),
-          email: this.props.info.get('email'),
-          birthday: this.props.info.get('birthday'),
-          nationality: this.props.info.get('nationality'),
-        },
-        errors: {
-          name: '',
-          lastName: '',
-          address: '',
-          number: '',
-          email: '',
-          birthday: '',
-          nationality: ''
-        }
-      };
-    }
+    this.state = {
+      fields: props.info ? props.info.toObject() : { id: 1 },
+      errors: {}
+    };
+    
   }
 
   validateForm = () => {
     const { fields } = this.state;
-    const errors = {
-      name: '',
-      lastName: '',
-      address: '',
-      number: '',
-      email: '',
-      birthday: '',
-      nationality: ''
-    };
+    const errors = {};
     let formIsValid = true;
 
     if (isEmpty(fields.name)) {
@@ -166,20 +119,10 @@ class InformationComponent extends Component {
   handleClick = (e) => {
     e.preventDefault();
     if (this.validateForm()) {
-      const info = Map({
-        id: 1,
-        name: this.state.fields.name,
-        lastName: this.state.fields.lastName,
-        address: this.state.fields.address,
-        number: this.state.fields.number,
-        email: this.state.fields.email,
-        birthday: this.state.fields.birthday,
-        nationality: this.state.fields.nationality
-      });
+      const info = Map(this.state.fields);
       this.props.addInfo(info);
       this.props.isCompleted('infoCompleted', true);
-      alert('Saved!');
-            
+      alert('Saved!');      
     }
   }
 
@@ -187,116 +130,13 @@ class InformationComponent extends Component {
     return (
       <>
         <h1>Information</h1>
-          <form>
-            <div className="form-row">
-              <label>
-                Name:
-              </label>
-              <div className="personal-field">
-                <input
-                  type="text"
-                  name="name"
-                  value={ this.state.fields.name }
-                  onChange={ this.handleChange }
-                >
-                </input>
-                <span className="validation">{this.state.errors.name}</span>
-              </div>
-              <label>
-                Last Name:
-              </label>
-              <div className="personal-field">
-                <input
-                  type="text"
-                  name="lastName"
-                  value={ this.state.fields.lastName }
-                  onChange={ this.handleChange }
-                >
-                </input>
-                <span className="validation">{this.state.errors.lastName}</span>
-              </div>
-            </div>
-            <div className="form-row">
-              <label>
-                Address:
-              </label>
-              <div className="personal-field">
-                <input
-                  id="address"
-                  type="text"
-                  name="address"
-                  value={ this.state.fields.address }
-                  placeholder="Maria de Molina Street, 54, 28006 Madrid, Spain"
-                  onChange={ this.handleChange }
-                >
-                </input>
-                <span className="validation">{this.state.errors.address}</span>
-              </div>
-            </div>
-            <div className="form-row">
-              <label>
-                Telephone number:
-              </label>
-              <div className="personal-field">
-                <input
-                  type="text"
-                  name="number"
-                  placeholder="+34..."
-                  value={ this.state.fields.number }
-                  onChange={ this.handleChange }
-                >
-                </input>
-                <span className="validation">{this.state.errors.number}</span>
-              </div>
-              <label>
-                Email:
-              </label>
-              <div className="personal-field">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="....@..."
-                  value={ this.state.fields.email }
-                  onChange={ this.handleChange }
-                >
-                </input>
-                <span className="validation">{this.state.errors.email}</span>
-              </div>
-            </div>
-            <div className="form-row">
-              <label>
-                Date of Birth:
-              </label>
-              <div className="personal-field">
-                <input
-                  type="text"
-                  name="birthday"
-                  placeholder="MM-DD-YYYY"
-                  value={ this.state.fields.birthday }
-                  onChange={ this.handleChange }></input>
-                <span className="validation">{this.state.errors.birthday}</span>
-              </div>
-              <label>
-                Nationality:
-              </label>
-              <div className="personal-field">
-                <input
-                  type="text"
-                  name="nationality"
-                  value={ this.state.fields.nationality }
-                  onChange={ this.handleChange }
-                >
-                </input>
-                <span className="validation">{this.state.errors.nationality}</span>
-              </div>
-            </div>
-            <input
-              id="save"
-              type="submit"
-              value="Save"
-              onClick={ this.handleClick } />
-          </form>
-            </>
+          <InformationForm 
+            state={ this.state } 
+            onChange={ this.handleChange }
+            onClick={ this.handleClick }
+          >
+          </InformationForm>
+    </>
     );
   }
 }

@@ -11,11 +11,11 @@ import Header from '../../components/Header/index.jsx';
 import Education from './containers/Education/index.jsx';
 import Aptitudes from './containers/Aptitudes/index.jsx';
 import Information from './containers/Information/index.jsx';
+import { deleteAll, writeAll } from './services/fileExport/index';
 import WorkExperience from './containers/WorkExperience/index.jsx';
 import Recommendation from './containers/Recommendations/index.jsx';
 
 class CV extends Component {
-
   static propTypes = {
     Cv: PropTypes.instanceOf(Record).isRequired
   }
@@ -45,65 +45,14 @@ class CV extends Component {
     this.setState({ allCompleted: false });
   }
 
-  writeJSON = (data, info) => fetch(`http://localhost:3000/${info}`, {
-    body: JSON.stringify(data),
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    method: 'POST'
-  }).then((response) => response.json());
-
-  deleteJSON = (info) => {
-    fetch(`http://localhost:3000/${info}`)
-      .then(resp => resp.json())
-      .then(data => {
-        data.map(field => {
-          fetch(`http://localhost:3000/${info}/${field.id}`, 
-            { method: 'DELETE' }).then((response) => response.json());
-        });
-      });
-  }
-
-  deleteAll = () => {
-    this.deleteJSON('information');
-    this.deleteJSON('education');
-    this.deleteJSON('workExperience');
-    this.deleteJSON('aptitudes');
-    this.deleteJSON('recommendation');
-  }
-
-  writeAll = (information, education, workExperience, aptitudes, recommendations) => {
-    this.writeJSON(information.toJS(), 'information');
-    education.map(field => (
-      this.writeJSON(field.toJS(), 'education')
-    ));
-
-    workExperience.map(field => (
-      this.writeJSON(field.toJS(), 'workExperience')
-    ));
-
-    aptitudes.map(field => (
-      this.writeJSON(field.toJS(), 'aptitudes')
-    ));
-
-    recommendations.map(field => (
-      this.writeJSON(field.toJS(), 'recommendation')
-    ));
-  }
-
   handleDownload = (e) => {
     e.preventDefault();
 
-    const information = this.props.Cv.get('information');
-    const education = this.props.Cv.get('education');
-    const workExperience = this.props.Cv.get('workExperience');
-    const aptitudes = this.props.Cv.get('aptitudes');
-    const recommendations = this.props.Cv.get('recommendations');
+    const { props } = this;
 
-    this.deleteAll();
-    this.writeAll(information, education, workExperience, aptitudes, recommendations);
-
+    deleteAll();
+    writeAll(props.Cv.get('information'), props.Cv.get('education'), 
+      props.Cv.get('workExperience'), props.Cv.get('aptitudes'), props.Cv.get('recommendations'));
   }
 
   render() {
@@ -117,29 +66,24 @@ class CV extends Component {
               <Route
                 path="/CV/personal-information"
                 render={ (props) => (<Information 
-                  { ...props } 
-                  isCompleted={ this.completed } />) 
+                  { ...props } isCompleted={ this.completed } />) 
                 } />
               <Route
                 path="/CV/education"
                 render={ (props) => (<Education 
-                  { ...props } 
-                  isCompleted={ this.completed } />) } />
+                  { ...props } isCompleted={ this.completed } />) } />
               <Route
                 path="/CV/work-experience"
                 render={ (props) => (<WorkExperience 
-                  { ...props } 
-                  isCompleted={ this.completed } />) } />
+                  { ...props } isCompleted={ this.completed } />) } />
               <Route
                 path="/CV/aptitudes"
                 render={ (props) => (<Aptitudes 
-                  { ...props } 
-                  isCompleted={ this.completed } 
+                  { ...props } isCompleted={ this.completed } 
                   onDelete={ this.hideButton } />) } />
               <Route
                 path="/CV/recommendation"
-                render={ (props) => (<Recommendation 
-                  { ...props } 
+                render={ (props) => (<Recommendation { ...props } 
                   isCompleted={ this.completed } />) } />
             </div>
           </div>
@@ -148,9 +92,7 @@ class CV extends Component {
     );
   }
 }
-
 const mapStateToProps = ({ Cv }) => ({
   Cv
 });
-
 export default connect(mapStateToProps)(CV);

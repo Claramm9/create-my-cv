@@ -26,7 +26,7 @@ const Display = ({
 );
 
 Display.propTypes = {
-  fields: PropTypes.array.isRequired,
+  fields: PropTypes.array,
   data: PropTypes.instanceOf(Map),
   isSimpleForm: PropTypes.bool.isRequired,
   onDelete: PropTypes.func,
