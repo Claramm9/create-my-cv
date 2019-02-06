@@ -7,6 +7,7 @@ import '../../styles.css';
 import { fields } from './models/index';
 import Modal from '../../components/Modal/index.jsx';
 import ListItem from '../../components/ListItem/index.jsx';
+import { sortData } from '../../services/sortData/sortData';
 import { EducationModel } from '../../models/EducationModel';
 import FormModal from '../../components/FormModal/index.jsx';
 import { addEducation, updateField } from '../../actions/index';
@@ -93,7 +94,7 @@ const mapDispatchToProps = dispatch => ({
   updateField: (info, title) => dispatch(updateField(info, title))
 });
 const mapStateToProps = ({ Cv }) => ({
-  education: Cv.get('education')
+  education: sortData(Cv.get('education'))
 });
 
 const Education = connect(mapStateToProps, mapDispatchToProps)(EducationComponent);

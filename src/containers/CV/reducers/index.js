@@ -14,34 +14,10 @@ const cvReducer = (state = initialStateCV, action) => {
       return state.set('information', action.payload);
 
     case ADD_EDUCATION:
-      const newData = state.get('education').push(action.payload);
-      const sortData = newData.sort((a, b) => {
-        if (new Date(a.get('endDate')) < new Date(b.get('endDate'))) {
-          return -1;
-        }
-        if (new Date(a.get('endDate')) > new Date(b.get('endDate'))) {
-          return 1;
-        }
-        if (new Date(a.get('endDate')) === new Date(b.get('endDate'))) {
-          return 0;
-        }
-      });
-      return state.set('education', sortData);
+      return state.update('education', (educ) => educ.push(action.payload));
 
     case ADD_WORK:
-      const data = state.get('workExperience').push(action.payload);
-      const sortedData = data.sort((a, b) => {
-        if (new Date(a.get('endDate')) < new Date(b.get('endDate'))) {
-          return -1;
-        }
-        if (new Date(a.get('endDate')) > new Date(b.get('endDate'))) {
-          return 1;
-        }
-        if (new Date(a.get('endDate')) === new Date(b.get('endDate'))) {
-          return 0;
-        }
-      });
-      return state.set('workExperience', sortedData);
+      return state.update('workExperience', work => work.push(action.payload));
 
     case ADD_APTITUDE:
       return state.update('aptitudes', (aptitudes) => aptitudes.push(action.payload));

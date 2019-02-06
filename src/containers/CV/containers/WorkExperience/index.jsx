@@ -8,6 +8,7 @@ import { fields } from './models/index';
 import Modal from '../../components/Modal/index.jsx';
 import ListItem from '../../components/ListItem/index.jsx';
 import { addWork, updateField } from '../../actions/index';
+import { sortData } from '../../services/sortData/sortData';
 import FormModal from '../../components/FormModal/index.jsx';
 import { WorkExperienceModel } from '../../models/WorkExperienceModel';
 
@@ -94,7 +95,7 @@ const mapDispatchToProps = dispatch => ({
   updateField: (info, title) => dispatch(updateField(info, title))
 });
 const mapStateToProps = ({ Cv }) => ({
-  workExperience: Cv.get('workExperience')
+  workExperience: sortData(Cv.get('workExperience'))
 });
 const WorkExperience = connect(mapStateToProps, mapDispatchToProps)(WorkExperienceComponent);
 
