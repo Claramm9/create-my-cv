@@ -1,6 +1,6 @@
-import { Map } from 'immutable';
+import { Record } from 'immutable';
 
-export const AptitudModel = Map({
-  id: '',
+export const AptitudModel = Record({
+  id: 1,
   title: ''
 });

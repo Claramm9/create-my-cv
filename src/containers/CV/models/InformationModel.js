@@ -1,6 +1,6 @@
-import { Map } from 'immutable';
+import { Record } from 'immutable';
 
-export const InformationModel = Map({
+export const InformationModel = Record({
   id: 1,
   name: '',
   lastName: '',

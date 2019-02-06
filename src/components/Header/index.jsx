@@ -21,8 +21,8 @@ const Header = ({ downloadButton, onDownload }) => (
 );
 
 Header.propTypes = {
-  downloadButton: PropTypes.bool.isRequired,
-  onDownload: PropTypes.func.isRequired
+  downloadButton: PropTypes.bool,
+  onDownload: PropTypes.func
 };
 
 export default Header;

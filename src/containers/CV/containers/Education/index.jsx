@@ -65,7 +65,7 @@ class EducationComponent extends Component {
   render() {
     const header = 'Create education';
     const isSimpleForm = false;
-    const modal = this.state.isEditing && (
+    const modal = this.state.isEditing ? null : (
       <Modal onChangeVisibility={ this.changeVisibility }
         isVisible={ this.state.isVisible } header={ header }>
         <FormModal onConfirm={ this.confirm } fields={ fields } isEditing={ this.state.isEditing }/>

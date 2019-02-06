@@ -1,9 +1,11 @@
-import { Map } from 'immutable';
+import { Record } from 'immutable';
 
-export const EducationModel = Map({
-  id: '',
-  company: '',
-  position: '',
+const uuid = require('uuid/v4');
+
+export const EducationModel = Record({
+  id: uuid(),
+  center: '',
+  studies: '',
   startDate: '',
   endDate: '',
   description: ''

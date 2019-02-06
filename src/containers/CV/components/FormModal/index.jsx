@@ -86,6 +86,7 @@ class FormModal extends Component {
         state={ this.state } 
         onChange={ this.handleChange } 
         onClick={ this.handleClick } 
+        onKeyPress= { this.handlePress }
       >
       </Form>
     );

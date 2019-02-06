@@ -39,6 +39,10 @@ class AptitudesComponent extends Component {
     this.setState({ aptitud: e.target.value });
   }
 
+  handlePress = (e) => {
+    if (e.which === 13) this.handleClick(e);
+  }
+
   handleClick = (e) => {
     e.preventDefault();
     if (this.validateForm()) {
@@ -75,7 +79,8 @@ class AptitudesComponent extends Component {
         <h1>{header}</h1>
         <div className="input-row">
           <input className="input-aptitude" type="text" name="aptitud"
-            value={ this.state.aptitud } onChange={ this.handleChange }>
+            value={ this.state.aptitud } onChange={ this.handleChange } 
+            onKeyPress={ this.handlePress }>
           </input>
           <button id="add" onClick={ this.handleClick }>Add</button>
         </div>

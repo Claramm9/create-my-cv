@@ -1,7 +1,9 @@
-import { Map } from 'immutable';
+import { Record } from 'immutable';
 
-export const WorkExperienceModel = Map({
-  id: '',
+const uuid = require('uuid/v4');
+
+export const WorkExperienceModel = Record({
+  id: uuid(),
   company: '',
   position: '',
   startDate: '',
