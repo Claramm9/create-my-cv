@@ -7,6 +7,7 @@ import '../../styles.css';
 import { fields } from './models/index';
 import Modal from '../../components/Modal/index.jsx';
 import ListItem from '../../components/ListItem/index.jsx';
+import { EducationModel } from '../../models/EducationModel';
 import FormModal from '../../components/FormModal/index.jsx';
 import { addEducation, updateField } from '../../actions/index';
 
@@ -46,17 +47,17 @@ class EducationComponent extends Component {
   }
 
   confirm = (data) => {
-    this.props.addEducation(data);
+    this.props.addEducation(new EducationModel(data));
     this.changeVisibility(false);
     this.props.isCompleted('eduCompleted', true);
   }
 
   update = (data) => {
     const title = 'education';
-    const info = this.props.education.map(field => (field.get('id') === data.get('id')
-      ? field.set('id', data.get('id')).set('center', data.get('center')).set('studies', data.get('studies')).set('startDate', data.get('startDate'))
-        .set('endDate', data.get('endDate'))
-        .set('description', data.get('description'))
+    const info = this.props.education.map(field => (field.get('id') === data.id
+      ? field.set('id', data.id).set('center', data.center).set('studies', data.studies).set('startDate', data.startDate)
+        .set('endDate', data.endDate)
+        .set('description', data.description)
       : field));
     this.props.updateField(info, title);
     this.changeVisibility(false);

@@ -9,6 +9,7 @@ import Modal from '../../components/Modal/index.jsx';
 import ListItem from '../../components/ListItem/index.jsx';
 import { addWork, updateField } from '../../actions/index';
 import FormModal from '../../components/FormModal/index.jsx';
+import { WorkExperienceModel } from '../../models/WorkExperienceModel';
 
 class WorkExperienceComponent extends Component {
   static propTypes = {
@@ -46,17 +47,17 @@ class WorkExperienceComponent extends Component {
   }
 
   confirm = (data) => {
-    this.props.addWork(data);
+    this.props.addWork(new WorkExperienceModel(data));
     this.changeVisibility(false);
     this.props.isCompleted('workCompleted', true);
   }
 
   update = (data) => {
     const title = 'workExperience';
-    const info = this.props.workExperience.map(field => (field.get('id') === data.get('id')
-      ? field.set('id', data.get('id')).set('company', data.get('company')).set('position', data.get('position')).set('startDate', data.get('startDate'))
-        .set('endDate', data.get('endDate'))
-        .set('description', data.get('description'))
+    const info = this.props.workExperience.map(field => ((field.get('id') === data.id)
+      ? field.set('id', data.id).set('company', data.company).set('position', data.position).set('startDate', data.startDate)
+        .set('endDate', data.endDate)
+        .set('description', data.description)
       : field));
     this.props.updateField(info, title);
     this.changeVisibility(false);

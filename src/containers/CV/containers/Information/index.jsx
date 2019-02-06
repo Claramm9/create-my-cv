@@ -1,17 +1,18 @@
-import { Map } from 'immutable';
+import { Record } from 'immutable';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 
 import './styles.css';
 import { addInfo } from '../../actions/index';
-import { validateForm } from '../../services/validation/validateForm';
+import { InformationModel } from '../../models/InformationModel';
 import InformationForm from './components/InformationForm/index.jsx';
+import { validateForm } from '../../services/validation/validateForm';
 
 class InformationComponent extends Component {
 
   static propTypes = {
-    info: PropTypes.instanceOf(Map),
+    info: PropTypes.instanceOf(Record),
     addInfo: PropTypes.func.isRequired,
     isCompleted: PropTypes.func.isRequired
   }
@@ -20,7 +21,7 @@ class InformationComponent extends Component {
     super(props);
 
     this.state = {
-      fields: props.info ? props.info.toObject() : { id: 1 },
+      fields: props.info ? props.info.toObject() : {},
       errors: {}
     };
     
@@ -38,8 +39,7 @@ class InformationComponent extends Component {
     e.preventDefault();
     const data = validateForm(this.state.fields);
     if (data.isFormValid) {
-      const info = Map(this.state.fields);
-      this.props.addInfo(info);
+      this.props.addInfo(new InformationModel(this.state.fields));
       this.props.isCompleted('infoCompleted', true);
       alert('Saved!');      
     } else {

@@ -1,9 +1,7 @@
 import { Record } from 'immutable';
 
-const uuid = require('uuid/v4');
-
 export const WorkExperienceModel = Record({
-  id: uuid(),
+  id: '',
   company: '',
   position: '',
   startDate: '',

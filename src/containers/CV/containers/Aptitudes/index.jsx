@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { Map, List } from 'immutable';
+import { List } from 'immutable';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import './styles.css';
 import '../../styles.css';
+import { AptitudModel } from '../../models/AptitudModel';
 import { isEmpty } from '../../services/validation/validator';
 import Display from '../../../../components/Display/index.jsx';
 import { addAptitud, deleteAptitud } from '../../actions/index';
+
+const uuid = require('uuid/v4');
 
 class AptitudesComponent extends Component {
   static propTypes = {
@@ -19,15 +22,15 @@ class AptitudesComponent extends Component {
   }
 
   state = {
-    aptitud: '',
+    fields: { aptitud: '' },
     error: ''
   }
 
-  validateForm = () => {
+  validateForm = (aptitud) => {
     let error = '';
     let formIsValid = true;
 
-    if (isEmpty(this.state.aptitud)) {
+    if (isEmpty(aptitud)) {
       formIsValid = false;
       error = '*This field can not be empty.';
     }
@@ -36,7 +39,12 @@ class AptitudesComponent extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({ aptitud: e.target.value });
+    const { fields } = this.state;
+    fields[e.target.name] = e.target.value;
+    this.setState({
+      fields
+    });
+    // this.setState({ aptitud: e.target.value });
   }
 
   handlePress = (e) => {
@@ -45,16 +53,17 @@ class AptitudesComponent extends Component {
 
   handleClick = (e) => {
     e.preventDefault();
-    if (this.validateForm()) {
-      const data = Map({
-        id: this.props.aptitudes.size + 1,
-        aptitud: this.state.aptitud
-      });
+    const { fields } = this.state;
+    if (this.validateForm(this.state.fields.aptitud)) { 
+      fields.id = uuid();
       this.setState({
-        aptitud: '',
+        fields
+      });     
+      this.props.addAptitud(new AptitudModel(this.state.fields));
+      this.setState({
+        fields: { aptitud: '' },
         error: ''
       });
-      this.props.addAptitud(data);
       this.props.isCompleted('aptitudCompleted', this.props.aptitudes.count() > 1);
     }
   }
@@ -79,7 +88,7 @@ class AptitudesComponent extends Component {
         <h1>{header}</h1>
         <div className="input-row">
           <input className="input-aptitude" type="text" name="aptitud"
-            value={ this.state.aptitud } onChange={ this.handleChange } 
+            value={ this.state.fields.aptitud } onChange={ this.handleChange } 
             onKeyPress={ this.handlePress }>
           </input>
           <button id="add" onClick={ this.handleClick }>Add</button>

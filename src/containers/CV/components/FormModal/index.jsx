@@ -70,12 +70,12 @@ class FormModal extends Component {
       });
     }
     if (this.validateForm(fields)) {
-      const data = Map(fields);   
+      this.props.onConfirm(fields);  
       this.setState({
         fields: {},
         errors: {}
       });
-      this.props.onConfirm(data);
+      
     }
   }
 

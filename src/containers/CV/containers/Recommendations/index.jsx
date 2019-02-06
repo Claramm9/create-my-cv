@@ -10,6 +10,7 @@ import Modal from '../../components/Modal/index.jsx';
 import ListItem from '../../components/ListItem/index.jsx';
 import FormModal from '../../components/FormModal/index.jsx';
 import { addRecommendation, updateField } from '../../actions';
+import { RecommendationModel } from '../../models/RecommendationModel';
 
 class RecommendationsComponent extends Component {
 
@@ -48,15 +49,15 @@ class RecommendationsComponent extends Component {
   }
 
   confirm = (data) => {
-    this.props.addRecommendation(data);
+    this.props.addRecommendation(new RecommendationModel(data));
     this.changeVisibility(false);
     this.props.isCompleted('recomCompleted', true);
   }
 
   update = (data) => {
     const title = 'recommendation';
-    const info = this.props.recommendations.map(field => (field.get('id') === data.get('id')
-      ? field.set('id', data.get('id')).set('name', data.get('name')).set('recommendation', data.get('recommendation'))
+    const info = this.props.recommendations.map(field => ((field.get('id') === data.id)
+      ? field.set('id', data.id).set('name', data.name).set('recommendation', data.recommendation)
       : field));
     this.props.updateField(info, title);
     this.changeVisibility(false);

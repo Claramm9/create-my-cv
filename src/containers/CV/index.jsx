@@ -21,12 +21,12 @@ class CV extends Component {
   }
 
   state = {
-    infoCompleted: false,
-    eduCompleted: false,
-    workCompleted: false,
-    aptitudCompleted: false,
-    recomCompleted: false,
-    allCompleted: false
+    infoCompleted: true,
+    eduCompleted: true,
+    workCompleted: true,
+    aptitudCompleted: true,
+    recomCompleted: true,
+    allCompleted: true
   }
 
   completed = (name, value) => {
