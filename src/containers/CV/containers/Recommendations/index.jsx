@@ -13,7 +13,6 @@ import { addRecommendation, updateField } from '../../actions';
 import { RecommendationModel } from '../../models/RecommendationModel';
 
 class RecommendationsComponent extends Component {
-
   static propTypes = {
     recommendations: PropTypes.instanceOf(List),
     addRecommendation: PropTypes.func.isRequired,
