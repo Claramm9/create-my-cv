@@ -28,6 +28,19 @@ class EducationComponent extends Component {
     redirect: true
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.education.size !== nextProps.education.size) {
+      return true;
+    }
+    if (this.state.isEditing !== nextState.isEditing) {
+      return true;
+    }
+    if (this.state.isVisible !== nextState.isVisible) {
+      return true;
+    }
+    return false;
+  }
+
   componentWillMount() {
     if (this.props.redirect === this.state.redirect) {
       this.setState({ redirect: !this.props.redirect });
