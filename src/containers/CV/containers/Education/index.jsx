@@ -1,3 +1,4 @@
+import { Redirect } from 'react-router-dom';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -17,12 +18,20 @@ class EducationComponent extends Component {
     education: PropTypes.instanceOf(List).isRequired,
     addEducation: PropTypes.func.isRequired,
     updateField: PropTypes.func.isRequired,
-    isCompleted: PropTypes.func.isRequired
+    isCompleted: PropTypes.func.isRequired,
+    redirect: PropTypes.bool.isRequired
   }
 
   state = {
     isVisible: false,
-    isEditing: false
+    isEditing: false,
+    redirect: true
+  }
+
+  componentWillMount() {
+    if (this.props.redirect === this.state.redirect) {
+      this.setState({ redirect: !this.props.redirect });
+    }
   }
 
   handleAdd = () => {
@@ -65,6 +74,9 @@ class EducationComponent extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/CV/personal-information"/>;
+    }
     const header = 'Create education';
     const isSimpleForm = false;
     const modal = this.state.isEditing ? null : (

@@ -1,7 +1,8 @@
+import { Redirect } from 'react-router-dom';
 import React, { Component } from 'react';
-import { List } from 'immutable';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { List } from 'immutable';
 
 import './styles.css';
 import '../../styles.css';
@@ -18,12 +19,20 @@ class AptitudesComponent extends Component {
     addAptitud: PropTypes.func.isRequired,
     isCompleted: PropTypes.func.isRequired,
     deleteAptitud: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired
+    onDelete: PropTypes.func.isRequired,
+    redirect: PropTypes.bool.isRequired
   }
 
   state = {
     fields: { aptitud: '' },
-    error: ''
+    error: '',
+    redirect: true
+  }
+
+  componentWillMount() {
+    if (this.props.redirect === this.state.redirect) {
+      this.setState({ redirect: !this.props.redirect });
+    }
   }
 
   validateForm = (aptitud) => {
@@ -44,7 +53,6 @@ class AptitudesComponent extends Component {
     this.setState({
       fields
     });
-    // this.setState({ aptitud: e.target.value });
   }
 
   handlePress = (e) => {
@@ -81,6 +89,9 @@ class AptitudesComponent extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/CV/personal-information"/>;
+    }
     const header = 'Aptitudes';
     const isSimpleForm = true;
     return (

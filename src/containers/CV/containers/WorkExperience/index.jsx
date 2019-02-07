@@ -2,6 +2,7 @@ import { List } from 'immutable';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import '../../styles.css';
 import { fields } from './models/index';
@@ -17,12 +18,20 @@ class WorkExperienceComponent extends Component {
     workExperience: PropTypes.instanceOf(List),
     addWork: PropTypes.func.isRequired,
     isCompleted: PropTypes.func.isRequired,
-    updateField: PropTypes.func.isRequired
+    updateField: PropTypes.func.isRequired,
+    redirect: PropTypes.bool.isRequired
   }
 
   state = {
     isVisible: false,
-    isEditing: false
+    isEditing: false,
+    redirect: true
+  }
+
+  componentWillMount() {
+    if (this.props.redirect === this.state.redirect) {
+      this.setState({ redirect: !this.props.redirect });
+    }
   }
 
   handleAdd = () => {
@@ -65,6 +74,9 @@ class WorkExperienceComponent extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/CV/personal-information"/>;
+    }
     const header = 'Create work experience';
     const isSimpleForm = false;
     const modal = this.state.isEditing ? null : (

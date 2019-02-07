@@ -70,21 +70,20 @@ class CV extends Component {
                 } />
               <Route
                 path="/CV/education"
-                render={ (props) => (<Education 
-                  { ...props } isCompleted={ this.completed } />) } />
+                render={ (props) => (<Education { ...props } 
+                  isCompleted={ this.completed } redirect={ this.state.infoCompleted }/>) } />
               <Route
                 path="/CV/work-experience"
-                render={ (props) => (<WorkExperience 
-                  { ...props } isCompleted={ this.completed } />) } />
+                render={ (props) => (<WorkExperience { ...props } 
+                  isCompleted={ this.completed } redirect={ this.state.eduCompleted }/>) } />
               <Route
                 path="/CV/aptitudes"
-                render={ (props) => (<Aptitudes 
-                  { ...props } isCompleted={ this.completed } 
-                  onDelete={ this.hideButton } />) } />
+                render={ (props) => (<Aptitudes { ...props } isCompleted={ this.completed } 
+                  onDelete={ this.hideButton } redirect={ this.state.workCompleted }/>) } />
               <Route
                 path="/CV/recommendation"
                 render={ (props) => (<Recommendation { ...props } 
-                  isCompleted={ this.completed } />) } />
+                  isCompleted={ this.completed } redirect={ this.state.workCompleted }/>) } />
             </div>
           </div>
         </div>
