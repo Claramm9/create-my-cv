@@ -1,55 +1,7 @@
 {
-  "information": [
-    {
-      "id": 1,
-      "name": "tyui",
-      "lastName": "rtyui",
-      "address": "rtyuio",
-      "number": "3456787654",
-      "email": "clara@gmail.com",
-      "birthday": "12-15-1994",
-      "nationality": "española"
-    }
-  ],
-  "education": [
-    {
-      "center": "rtyui",
-      "studies": "rtyuio",
-      "startDate": "11-11-2000",
-      "endDate": "11-11-2002",
-      "description": "slakm",
-      "id": "16c355dd-cfdc-4893-b0c7-67c01931bab0"
-    }
-  ],
-  "workExperience": [
-    {
-      "company": "tyuio",
-      "position": "yuiop",
-      "startDate": "11-11-2000",
-      "endDate": "11-11-2002",
-      "description": "lkmlm",
-      "id": "8d95c9e0-dc02-40e8-8f30-7cc956d641a7"
-    }
-  ],
-  "aptitudes": [
-    {
-      "id": 1,
-      "aptitud": "tyu"
-    },
-    {
-      "id": 2,
-      "aptitud": "qwq"
-    },
-    {
-      "id": 3,
-      "aptitud": "asd"
-    }
-  ],
-  "recommendation": [
-    {
-      "name": "rtyui",
-      "recommendation": "fghjk",
-      "id": "82b29d1c-cd42-49b4-89d2-0e2c81f73016"
-    }
-  ]
+  "information": [],
+  "education": [],
+  "workExperience": [],
+  "aptitudes": [],
+  "recommendation": []
 }

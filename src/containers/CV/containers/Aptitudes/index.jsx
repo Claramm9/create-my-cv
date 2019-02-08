@@ -29,16 +29,6 @@ class AptitudesComponent extends Component {
     redirect: true
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.aptitudes.size !== nextProps.aptitudes.size) {
-      return true;
-    }
-    if (this.state.redirect !== nextState.redirect) {
-      return true;
-    }
-    return false;
-  }
-
   componentWillMount() {
     if (this.props.redirect === this.state.redirect) {
       this.setState({ redirect: !this.props.redirect });
